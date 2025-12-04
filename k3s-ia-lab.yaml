@@ -1,0 +1,233 @@
+apiVersion: v1
+kind: Namespace
+metadata:
+  name: k3s-ia-lab
+---
+apiVersion: v1
+kind: Service
+metadata:
+  labels:
+    app: openfire
+  name: openfire-lb
+  namespace: k3s-ia-lab
+spec:
+  ports:
+    - name: admin-console
+      port: 9090
+      protocol: TCP
+      targetPort: 9090
+    - name: xmpp
+      port: 5222
+      protocol: TCP
+      targetPort: 5222
+    - name: inverse
+      port: 7070
+      protocol: TCP
+      targetPort: 7070
+  selector:
+    app: openfire
+  sessionAffinity: None
+  type: LoadBalancer
+---
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  annotations:
+    deployment.kubernetes.io/revision: "1"
+  labels:
+    app: openfire
+  name: openfire
+  namespace: k3s-ia-lab
+spec:
+  progressDeadlineSeconds: 600
+  replicas: 1
+  revisionHistoryLimit: 3
+  selector:
+    matchLabels:
+      app: openfire
+  template:
+    metadata:
+      labels:
+        app: openfire
+    spec:
+      containers:
+        - image: registry.gitlab.com/soapboxrace/openfire:5.0.2
+          env:
+            - name: OPENFIRE_FQDN
+              value: 192.168.13.13
+          imagePullPolicy: Always
+          name: openfire
+          ports:
+            - containerPort: 9090
+              protocol: TCP
+            - containerPort: 5222
+              protocol: TCP
+            - containerPort: 7070
+              protocol: TCP
+      dnsPolicy: ClusterFirst
+      restartPolicy: Always
+---
+apiVersion: v1
+kind: Namespace
+metadata:
+  name: ollama
+
+---
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: ollama
+  namespace: k3s-ia-lab
+  labels:
+    app: ollama
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: ollama
+  template:
+    metadata:
+      labels:
+        app: ollama
+    spec:
+      restartPolicy: Always
+      runtimeClassName: nvidia
+      containers:
+        - name: ollama-container
+          image: ollama/ollama
+          ports:
+            - containerPort: 11434
+              name: http
+              protocol: TCP
+          resources:
+            limits:
+              nvidia.com/gpu: 1
+          env:
+            - name: NVIDIA_VISIBLE_DEVICES
+              value: all
+            - name: NVIDIA_DRIVER_CAPABILITIES
+              value: all
+          volumeMounts:
+            - name: ollama-storage
+              mountPath: /root/.ollama
+      volumes:
+        - name: ollama-storage
+          hostPath:
+            path: /mnt/data/ollama
+            type: DirectoryOrCreate
+
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: ollama-service
+  namespace: k3s-ia-lab
+  labels:
+    app: ollama
+spec:
+  type: ClusterIP
+  ports:
+    - port: 11434
+      targetPort: 11434
+      protocol: TCP
+  selector:
+    app: ollama
+---
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: rabbitmq
+  namespace: k3s-ia-lab
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: rabbitmq
+  template:
+    metadata:
+      labels:
+        app: rabbitmq
+    spec:
+      containers:
+        - name: rabbitmq
+          image: rabbitmq:3.13.7-management
+          env:
+            - name: RABBITMQ_DEFAULT_USER
+              value: "user"
+            - name: RABBITMQ_DEFAULT_PASS
+              value: "password"
+            - name: RABBITMQ_FRAME_MAX
+              value: "4096"
+          ports:
+            - containerPort: 5672
+              protocol: TCP
+            - containerPort: 15672
+              protocol: TCP
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: rabbitmq-lb
+  namespace: k3s-ia-lab
+spec:
+  selector:
+    app: rabbitmq
+  ports:
+    - name: amqp
+      port: 5672
+      targetPort: 5672
+      protocol: TCP
+    - name: management
+      port: 15672
+      targetPort: 15672
+      protocol: TCP
+  type: LoadBalancer
+---
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: n8n
+  namespace: k3s-ia-lab
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: n8n
+  template:
+    metadata:
+      labels:
+        app: n8n
+    spec:
+      containers:
+        - name: n8n
+          image: docker.n8n.io/n8nio/n8n:1.121.3
+          env:
+            - name: N8N_SECURE_COOKIE
+              value: "false"
+            - name: N8N_CUSTOM_EXTENSIONS
+              value: "/home/node/.n8n/custom"
+          ports:
+            - containerPort: 5678
+          volumeMounts:
+            - name: n8n-data
+              mountPath: /home/node/.n8n
+      volumes:
+        - name: n8n-data
+          hostPath:
+            path: /mnt/data/n8n
+            type: DirectoryOrCreate
+
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: n8n-lb
+  namespace: k3s-ia-lab
+spec:
+  selector:
+    app: n8n
+  ports:
+    - port: 5678
+      targetPort: 5678
+      protocol: TCP
+  type: LoadBalancer
