@@ -76,30 +76,39 @@ sudo mkdir -p /mnt/data/n8n /mnt/data/ollama
 sudo chmod -r 777 /mnt/data
 ```
 
+add to your /etc/hosts file (server and client) the following entries:
+```
+<your-k3s-ipv4> n8n.k3s-ia-lab.lan xmpp.k3s-ia-lab.lan xmpp-adm.k3s-ia-lab.lan rabbitmq.k3s-ia-lab.lan
+```
+
+deploy the k3s manifests:
 ```bash
 kubectl apply -f k3s-ia-lab.yaml
 ```
 
 rabbitmq:
-- dns: rabbitmq-lb.k3s-ia-lab.svc.cluster.local
-- port: 5672 tcp/ampq, 15672 tcp/http
+- dns: rabbitmq-lb.k3s-ia-lab.svc.cluster.local (k8s internal)
+- port: 5672 tcp/ampq
+- url management: http://rabbitmq.k3s-ia-lab.lan
 - user: user
 - password: password
 - vhost: /
 
 openfire (pre-configured):
-- ip: home-lab-ip (change inside k3s-ia-lab.yaml OPENFIRE_FQDN)
-- ports: 5222 tcp/xmpp, 9090 tcp/http, 7070 tcp/http
+- ip: xmpp.k3s-ia-lab.lan
+- url xmpp: http://xmpp.k3s-ia-lab.lan/
+- url adm: http://xmpp-adm.k3s-ia-lab.lan/
+- ports: 5222 tcp/xmpp
 - user: admin
 - password: admin
 
 n8n (needs first setup):
-- ip: home-lab-ip
+- url: http://n8n.k3s-ia-lab.lan/
 - ports: 5678 tcp/http
 - volume mount /mnt/data/n8n
 
 ollama:
-- url: http://ollama-service.k3s-ia-lab.svc.cluster.local:11434
+- url: http://ollama-service.k3s-ia-lab.svc.cluster.local:11434 (k8s internal)
 - no apikey
 - volume mount /mnt/data/ollama
 

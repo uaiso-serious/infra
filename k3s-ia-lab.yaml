@@ -8,7 +8,25 @@ kind: Service
 metadata:
   labels:
     app: openfire
-  name: openfire-lb
+  name: xmpp-lb
+  namespace: k3s-ia-lab
+spec:
+  ports:
+    - name: xmpp
+      port: 5222
+      protocol: TCP
+      targetPort: 5222
+  selector:
+    app: openfire
+  sessionAffinity: None
+  type: LoadBalancer
+---
+apiVersion: v1
+kind: Service
+metadata:
+  labels:
+    app: openfire
+  name: openfire-http
   namespace: k3s-ia-lab
 spec:
   ports:
@@ -16,10 +34,6 @@ spec:
       port: 9090
       protocol: TCP
       targetPort: 9090
-    - name: xmpp
-      port: 5222
-      protocol: TCP
-      targetPort: 5222
     - name: inverse
       port: 7070
       protocol: TCP
@@ -27,7 +41,7 @@ spec:
   selector:
     app: openfire
   sessionAffinity: None
-  type: LoadBalancer
+  type: ClusterIP
 ---
 apiVersion: apps/v1
 kind: Deployment
@@ -171,11 +185,22 @@ spec:
       port: 5672
       targetPort: 5672
       protocol: TCP
+  type: LoadBalancer
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: rabbitmq-mgmt
+  namespace: k3s-ia-lab
+spec:
+  selector:
+    app: rabbitmq
+  ports:
     - name: management
       port: 15672
       targetPort: 15672
       protocol: TCP
-  type: LoadBalancer
+  type: ClusterIP
 ---
 apiVersion: apps/v1
 kind: Deployment
@@ -229,7 +254,7 @@ spec:
 apiVersion: networking.k8s.io/v1
 kind: Ingress
 metadata:
-  name: n8n-ingress
+  name: k3s-ia-lab-ingress
   namespace: k3s-ia-lab
   annotations:
     traefik.ingress.kubernetes.io/router.entrypoints: web
@@ -245,3 +270,33 @@ spec:
                 name: n8n-lb
                 port:
                   number: 5678
+    - host: xmpp.k3s-ia-lab.lan
+      http:
+        paths:
+          - path: /
+            pathType: Prefix
+            backend:
+              service:
+                name: openfire-http
+                port:
+                  number: 7070
+    - host: xmpp-adm.k3s-ia-lab.lan
+      http:
+        paths:
+          - path: /
+            pathType: Prefix
+            backend:
+              service:
+                name: openfire-http
+                port:
+                  number: 9090
+    - host: rabbitmq.k3s-ia-lab.lan
+      http:
+        paths:
+          - path: /
+            pathType: Prefix
+            backend:
+              service:
+                name: rabbitmq-mgmt
+                port:
+                  number: 15672
