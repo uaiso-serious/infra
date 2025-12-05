@@ -54,7 +54,7 @@ spec:
         - image: registry.gitlab.com/soapboxrace/openfire:5.0.2
           env:
             - name: OPENFIRE_FQDN
-              value: 192.168.13.13
+              value: xmpp.k3s-ia-lab.lan
           imagePullPolicy: Always
           name: openfire
           ports:
@@ -66,12 +66,6 @@ spec:
               protocol: TCP
       dnsPolicy: ClusterFirst
       restartPolicy: Always
----
-apiVersion: v1
-kind: Namespace
-metadata:
-  name: ollama
-
 ---
 apiVersion: apps/v1
 kind: Deployment
@@ -230,4 +224,24 @@ spec:
     - port: 5678
       targetPort: 5678
       protocol: TCP
-  type: LoadBalancer
+  type: ClusterIP
+---
+apiVersion: networking.k8s.io/v1
+kind: Ingress
+metadata:
+  name: n8n-ingress
+  namespace: k3s-ia-lab
+  annotations:
+    traefik.ingress.kubernetes.io/router.entrypoints: web
+spec:
+  rules:
+    - host: n8n.k3s-ia-lab.lan
+      http:
+        paths:
+          - path: /
+            pathType: Prefix
+            backend:
+              service:
+                name: n8n-lb
+                port:
+                  number: 5678

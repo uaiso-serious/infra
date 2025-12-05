@@ -1,6 +1,32 @@
 This project contains k3s (lightweight Kubernetes) deployment manifests for my home lab setup.
 
+# Integration between XMPP, n8n, and AI (Ollama)
+
+This project not only provisions services in the K3s cluster but also demonstrates how they can work together to create a complete experience:
+
+```
+   XMPP Client -> Openfire -> AI via Ollama -> XMPP Client
+```
+
+You can use any XMPP client (such as Pidgin, Gajim Dino, web-xmpp) to connect to the Openfire server.
+
+A n8n workflow acts as a bridge, receiving messages from the user and sending them to the LLM running on Ollama, then returning the response directly in the chat.
+
+Example n8n Workflow
+The repository already includes a versioned n8n workflow that shows how to integrate XMPP events and Ollama API calls, enabling advanced automation (e.g., processing messages, enriching responses, or triggering other actions).
+
+# Example Flow:
+
+[severino-xmpp.json](n8n/severino-xmpp.json)
+```
+   User (XMPP Client) -> Openfire -> Bot -> Ollama -> User (XMPP Client)
+```
+
 When it's running, is possible to "talk" with Ollama using jabber/xmpp client using n8n workflows.
+
+You can use local models running on Ollama or different LLM cloud services like [OpenAI](https://openai.com/), [Antropic](https://www.anthropic.com/), Deepseek, Google Gemini, Aws bedrock, Groq, or any available n8n nodes.
+
+---
 
 home lab bare metal specs:
 - Intel(R) Core(TM) i7-3770 CPU @ 3.40GHz
@@ -44,14 +70,14 @@ helm install --wait nvidiagpu \
 nvidia/gpu-operator
 ```
 
-```bash
-kubectl apply -f k3s-ia-lab.yaml
-```
-
 create the persistent volume folders:
 ```bash
 sudo mkdir -p /mnt/data/n8n /mnt/data/ollama
 sudo chmod -r 777 /mnt/data
+```
+
+```bash
+kubectl apply -f k3s-ia-lab.yaml
 ```
 
 rabbitmq:
@@ -85,16 +111,14 @@ Don't expose this setup to the internet, it's for home lab use only. There's no 
 
 The openfire image is a custom build with pre-configured settings for easier setup.
 
-There's no ingress controller configured.
-
 ---
 
 Wanted services to add in the future:
 - onedev
 - keycloak
 - custom ubuntu container with dev, ops, network tools, ia-console tools.
-- ssh-mcp-server (allow llm to access the custom ubuntu container via ssh)
+- ssh-mcp-server (allow LLM to access the custom ubuntu container via ssh)
 - playright test runner container
-- playright mcp server (allow llm to execute the playright test runner)
+- playright mcp server (allow LLM to execute the playright test runner)
 - pgsql vector db for embeddings storage
 - pgsql for onedev, n8n, keycloak, openfire and random experiments
