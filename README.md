@@ -78,7 +78,7 @@ sudo chmod 777 /mnt/data
 
 add to your /etc/hosts file (server and client) the following entries:
 ```
-<your-k3s-ipv4> n8n.k3s-ia-lab.lan xmpp.k3s-ia-lab.lan xmpp-adm.k3s-ia-lab.lan rabbitmq.k3s-ia-lab.lan open-webui.k3s-ia-lab.lan
+<your-k3s-ipv4> n8n.k3s-ia-lab.lan xmpp.k3s-ia-lab.lan xmpp-adm.k3s-ia-lab.lan rabbitmq.k3s-ia-lab.lan open-webui.k3s-ia-lab.lan auth.k3s-ia-lab.lan
 ```
 
 edit hostAliases inside [k3s-ia-lab.yaml](k3s-ia-lab.yaml) with <your-k3s-ipv4>
@@ -116,6 +116,9 @@ ollama:
 open-webui (needs first setup):
 - url http://open-webui.k3s-ia-lab.lan/
 - volume mount /mnt/data/open-webui
+
+keycloak (needs create keycloak pgsql db, setup with port forwarding):
+- url: http://auth.k3s-ia-lab.lan/
 
 ---
 
