@@ -163,6 +163,10 @@ spec:
       labels:
         app: open-webui
     spec:
+      hostAliases:
+        - ip: "192.168.13.13"
+          hostnames:
+            - "auth.k3s-ia-lab.lan"
       containers:
         - name: open-webui-container
           image: ghcr.io/open-webui/open-webui:main
@@ -173,6 +177,24 @@ spec:
           env:
             - name: OLLAMA_BASE_URL
               value: "http://ollama-service.k3s-ia-lab.svc.cluster.local:11434"
+            - name: WEBUI_URL
+              value: "http://open-webui.k3s-ia-lab.lan/"
+            - name: OPENID_PROVIDER_URL
+              value: "http://auth.k3s-ia-lab.lan/realms/k3s-ia-lab/.well-known/openid-configuration"
+            - name: OAUTH_CLIENT_ID
+              value: "open-webui-client"
+            - name: OAUTH_CLIENT_SECRET
+              value: "vt9g0iXt2CFTSbpa3VdGhPvbvyKNKqkq"
+            - name: ENABLE_OAUTH_SIGNUP
+              value: "true"
+            - name: OAUTH_PROVIDER_NAME
+              value: "Keycloak"
+            - name: OAUTH_SCOPES
+              value: "openid email profile"
+            - name: OPENID_REDIRECT_URI
+              value: "http://open-webui.k3s-ia-lab.lan/oauth/oidc/callback"
+            - name: DEFAULT_USER_ROLE
+              value: "admin"
           volumeMounts:
             - name: open-webui-storage
               mountPath: /app/backend/data
