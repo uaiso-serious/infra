@@ -210,7 +210,7 @@ spec:
             - name: DATABASE_PASSWORD
               value: "mysecurepassword"
             - name: DATABASE_HOST
-              value: "postgres-lb"
+              value: "postgres-lb.k3s-ia-lab.svc.cluster.local"
             - name: DATABASE_PORT
               value: "5432"
             - name: DATABASE_NAME
@@ -327,8 +327,18 @@ spec:
           env:
             - name: N8N_SECURE_COOKIE
               value: "false"
-            - name: N8N_CUSTOM_EXTENSIONS
-              value: "/home/node/.n8n/custom"
+            - name: DB_TYPE
+              value: "postgresdb"
+            - name: DB_POSTGRESDB_HOST
+              value: "postgres-lb.k3s-ia-lab.svc.cluster.local"
+            - name: DB_POSTGRESDB_PORT
+              value: "5432"
+            - name: DB_POSTGRESDB_DATABASE
+              value: "n8n"
+            - name: DB_POSTGRESDB_USER
+              value: "postgres"
+            - name: DB_POSTGRESDB_PASSWORD
+              value: "mysecurepassword"
           ports:
             - containerPort: 5678
           volumeMounts:
@@ -426,7 +436,7 @@ spec:
             - name: KC_DB
               value: postgres
             - name: KC_DB_URL_HOST
-              value: postgres-lb
+              value: postgres-lb.k3s-ia-lab.svc.cluster.local
             - name: KC_DB_URL_PORT
               value: "5432"
             - name: KC_DB_URL_DATABASE

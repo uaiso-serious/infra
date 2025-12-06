@@ -72,8 +72,8 @@ nvidia/gpu-operator
 
 create the persistent volume folder:
 ```bash
-sudo mkdir -p /mnt/data
-sudo chmod 777 /mnt/data
+sudo mkdir -p /mnt/data/n8n
+sudo chmod -R 777 /mnt/data
 ```
 
 add to your /etc/hosts file (server and client) the following entries:
@@ -114,7 +114,7 @@ ollama:
 - volume mount /mnt/data/ollama
 
 postgres:
- - dns host: postgresql-lb.k3s-ia-lab.svc.cluster.local (k8s internal)
+ - dns host: postgres-lb.k3s-ia-lab.svc.cluster.local (k8s internal)
  - ip <your-k3s-ipv4>
  - port: 5432
  - user: postgres
