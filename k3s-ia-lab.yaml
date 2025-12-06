@@ -148,6 +148,58 @@ spec:
 apiVersion: apps/v1
 kind: Deployment
 metadata:
+  name: open-webui
+  namespace: k3s-ia-lab
+  labels:
+    app: open-webui
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: open-webui
+  template:
+    metadata:
+      labels:
+        app: open-webui
+    spec:
+      containers:
+        - name: open-webui-container
+          image: ghcr.io/open-webui/open-webui:main
+          ports:
+            - containerPort: 8080
+              name: http
+              protocol: TCP
+          env:
+            - name: OLLAMA_BASE_URL
+              value: "http://ollama-service.k3s-ia-lab.svc.cluster.local:11434"
+          volumeMounts:
+            - name: open-webui-storage
+              mountPath: /app/backend/data
+      volumes:
+        - name: open-webui-storage
+          hostPath:
+            path: /mnt/data/open-webui
+            type: DirectoryOrCreate
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: open-webui-service
+  namespace: k3s-ia-lab
+  labels:
+    app: open-webui
+spec:
+  type: ClusterIP
+  ports:
+    - port: 8080
+      targetPort: 8080
+      protocol: TCP
+  selector:
+    app: open-webui
+---
+apiVersion: apps/v1
+kind: Deployment
+metadata:
   name: rabbitmq
   namespace: k3s-ia-lab
 spec:
