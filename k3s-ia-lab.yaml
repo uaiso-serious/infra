@@ -147,7 +147,7 @@ spec:
     app: ollama
 ---
 apiVersion: apps/v1
-kind: Deployment
+kind: StatefulSet
 metadata:
   name: open-webui
   namespace: k3s-ia-lab
@@ -260,7 +260,7 @@ spec:
   type: ClusterIP
 ---
 apiVersion: apps/v1
-kind: Deployment
+kind: StatefulSet
 metadata:
   name: n8n
   namespace: k3s-ia-lab
