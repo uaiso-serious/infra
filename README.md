@@ -139,8 +139,8 @@ The openfire image is a custom build with pre-configured settings for easier set
 ---
 
 Wanted services to add in the future:
+- n8n sso with keycloak (https://github.com/PavelSozonov/n8n-community-sso)
 - onedev
-- keycloak
 - custom ubuntu container with dev, ops, network tools, ia-console tools.
 - ssh-mcp-server (allow LLM to access the custom ubuntu container via ssh)
 - playright test runner container
