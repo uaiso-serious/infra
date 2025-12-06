@@ -113,6 +113,10 @@ ollama:
 - no apikey
 - volume mount /mnt/data/ollama
 
+open-webui (needs first setup):
+- url http://open-webui.k3s-ia-lab.lan/
+- volume mount /mnt/data/open-webui
+
 ---
 
 notes...
