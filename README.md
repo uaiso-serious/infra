@@ -119,6 +119,7 @@ postgres:
  - port: 5432
  - user: postgres
  - password: mysecurepassword
+ - volume mount /mnt/data/postgres
 
 keycloak (needs create keycloak pgsql db, setup with port forwarding):
 - url: http://auth.k3s-ia-lab.lan/
