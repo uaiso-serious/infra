@@ -113,12 +113,19 @@ ollama:
 - no apikey
 - volume mount /mnt/data/ollama
 
-open-webui (needs first setup):
-- url http://open-webui.k3s-ia-lab.lan/
-- volume mount /mnt/data/open-webui
+postgres:
+ - dns host: postgresql-lb.k3s-ia-lab.svc.cluster.local (k8s internal)
+ - ip <your-k3s-ipv4>
+ - port: 5432
+ - user: postgres
+ - password: mysecurepassword
 
 keycloak (needs create keycloak pgsql db, setup with port forwarding):
 - url: http://auth.k3s-ia-lab.lan/
+
+open-webui (needs keycloak, create openwebui pgsql db, needs first setup):
+- url http://open-webui.k3s-ia-lab.lan/
+- volume mount /mnt/data/open-webui
 
 ---
 
@@ -138,4 +145,3 @@ Wanted services to add in the future:
 - playright test runner container
 - playright mcp server (allow LLM to execute the playright test runner)
 - pgsql vector db for embeddings storage
-- pgsql for onedev, n8n, keycloak, openfire and random experiments

@@ -203,6 +203,18 @@ spec:
               value: "false"
             - name: OAUTH_MERGE_ACCOUNTS_BY_EMAIL
               value: "true"
+            - name: DATABASE_TYPE
+              value: "postgres"
+            - name: DATABASE_USER
+              value: "postgres"
+            - name: DATABASE_PASSWORD
+              value: "mysecurepassword"
+            - name: DATABASE_HOST
+              value: "postgres-lb"
+            - name: DATABASE_PORT
+              value: "5432"
+            - name: DATABASE_NAME
+              value: "openwebui"
           volumeMounts:
             - name: open-webui-storage
               mountPath: /app/backend/data
@@ -379,7 +391,7 @@ spec:
 apiVersion: v1
 kind: Service
 metadata:
-  name: postgres-service
+  name: postgres-lb
   namespace: k3s-ia-lab
 spec:
   selector:
@@ -414,7 +426,7 @@ spec:
             - name: KC_DB
               value: postgres
             - name: KC_DB_URL_HOST
-              value: postgres-service
+              value: postgres-lb
             - name: KC_DB_URL_PORT
               value: "5432"
             - name: KC_DB_URL_DATABASE
