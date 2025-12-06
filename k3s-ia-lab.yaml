@@ -312,6 +312,55 @@ spec:
       protocol: TCP
   type: ClusterIP
 ---
+apiVersion: apps/v1
+kind: StatefulSet
+metadata:
+  name: postgres
+  namespace: k3s-ia-lab
+  labels:
+    app: postgres
+spec:
+  serviceName: "postgres-service"
+  replicas: 1
+  selector:
+    matchLabels:
+      app: postgres
+  template:
+    metadata:
+      labels:
+        app: postgres
+    spec:
+      containers:
+        - name: postgres
+          image: postgres:18.1
+          env:
+            - name: POSTGRES_PASSWORD
+              value: "mysecurepassword"
+          volumeMounts:
+            - name: postgres-data
+              mountPath: /var/lib/postgresql
+      volumes:
+        - name: postgres-data
+          hostPath:
+            path: /mnt/data/postgres
+            type: DirectoryOrCreate
+
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: postgres-service
+  namespace: k3s-ia-lab
+spec:
+  selector:
+    app: postgres
+  ports:
+    - protocol: TCP
+      port: 5432
+      targetPort: 5432
+  type: LoadBalancer
+
+---
 apiVersion: networking.k8s.io/v1
 kind: Ingress
 metadata:
