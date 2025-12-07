@@ -1,0 +1,13 @@
+ingress:
+  enabled: true
+  className: "traefik"
+  host: "onedev.k3s-ia-lab.lan"
+
+database:
+  external: true
+  type: "postgresql"
+  host: "postgres-lb.k3s-ia-lab.svc.cluster.local"
+  port: "5432"
+  name: "onedev"
+  user: "postgres"
+  password: "mysecurepassword"

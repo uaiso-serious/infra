@@ -78,7 +78,7 @@ sudo chmod -R 777 /mnt/data
 
 add to your /etc/hosts file (server and client) the following entries:
 ```
-<your-k3s-ipv4> n8n.k3s-ia-lab.lan xmpp.k3s-ia-lab.lan xmpp-adm.k3s-ia-lab.lan rabbitmq.k3s-ia-lab.lan open-webui.k3s-ia-lab.lan auth.k3s-ia-lab.lan
+<your-k3s-ipv4> n8n.k3s-ia-lab.lan xmpp.k3s-ia-lab.lan xmpp-adm.k3s-ia-lab.lan rabbitmq.k3s-ia-lab.lan open-webui.k3s-ia-lab.lan auth.k3s-ia-lab.lan onedev.k3s-ia-lab.lan
 ```
 
 edit hostAliases inside [k3s-ia-lab.yaml](k3s-ia-lab.yaml) with <your-k3s-ipv4>
@@ -130,6 +130,8 @@ open-webui (needs keycloak, create openwebui pgsql db, needs first setup):
 - url http://open-webui.k3s-ia-lab.lan/
 - volume mount /mnt/data/open-webui
 
+[README.md](onedev/README.md)
+
 ---
 
 notes...
@@ -145,5 +147,4 @@ Wanted features:
 - ssh-mcp-server (allow LLM to access the custom ubuntu container via ssh)
 - playright test runner container
 - playright mcp server (allow LLM to execute the playright test runner)
-- onedev
 - n8n sso with keycloak (https://github.com/PavelSozonov/n8n-community-sso)
