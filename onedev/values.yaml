@@ -11,3 +11,9 @@ database:
   name: "onedev"
   user: "postgres"
   password: "mysecurepassword"
+
+service:
+  separateSSH:
+    enabled: true
+    type: "LoadBalancer"
+    port: 22
