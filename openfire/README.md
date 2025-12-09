@@ -24,10 +24,7 @@ curl -X 'POST' \
   -d '{
   "jid": "severino@xmpp.k3s-ia-lab.lan",
   "nickname": "severino",
-  "subscriptionType": 1,
-  "groups": [
-    "Buddies"
-  ]
+  "subscriptionType": 1
 }'
 ```
 
