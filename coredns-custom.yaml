@@ -1,0 +1,22 @@
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: coredns-custom
+  namespace: kube-system
+data:
+  k3s-ia-lab.lan.server: |
+    k3s-ia-lab.lan:53 {
+      log
+      errors
+      file /etc/coredns/custom/db.k3s-ia-lab.lan
+    }
+  db.k3s-ia-lab.lan: |
+    $ORIGIN k3s-ia-lab.lan.
+    @       3600 IN SOA    sns.dns.icann.org. noc.dns.icann.org. 2017042745 7200 3600 1209600 3600
+            3600 IN NS     a.iana-servers.net.
+            3600 IN NS     b.iana-servers.net.
+    *          IN A      192.168.13.13
+  empty.override: |
+    #
+  empty.server: |
+    #

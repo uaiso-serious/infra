@@ -37,11 +37,14 @@ home lab bare metal specs:
 - Ubuntu Server 24.04 LTS
 - k3s v1.33.6+k3s1 (b5847677)
 
-K3s namespace k3s-ia-lab deployments
+K3s namespace k3s-ia-lab deployments/statefulsets:
 - n8n
 - ollama
 - openfire
 - rabbitmq
+- postgresql with pgvector extension
+- keycloak
+- open-webui
 
 install Ubuntu 24.04 NVIDIA drivers:
 https://projectable.me/ubuntu-24-04-nvidia-drivers-ollama/
@@ -76,16 +79,24 @@ sudo mkdir -p /mnt/data/n8n
 sudo chmod -R 777 /mnt/data
 ```
 
-add to your /etc/hosts file (server and client) the following entries:
-```
-<your-k3s-ipv4> n8n.k3s-ia-lab.lan xmpp.k3s-ia-lab.lan xmpp-adm.k3s-ia-lab.lan rabbitmq.k3s-ia-lab.lan open-webui.k3s-ia-lab.lan auth.k3s-ia-lab.lan onedev.k3s-ia-lab.lan
+edit coredns-custom.yaml with your k3s ipv4 address
+```text
+*          IN A      <your-k3s-ipv4>
 ```
 
-edit hostAliases inside [k3s-ia-lab.yaml](k3s-ia-lab.yaml) with <your-k3s-ipv4>
+deploy the custom coredns config to resolve k3s-ia-lab.lan domains:
+```bash
+kubectl apply -f coredns-custom.yaml
+```
 
 deploy the k3s manifests:
 ```bash
 kubectl apply -f k3s-ia-lab.yaml
+```
+
+/etc/hosts file entrie to access the ingress routes from your local network:
+```
+<your-k3s-ipv4> n8n.k3s-ia-lab.lan xmpp.k3s-ia-lab.lan xmpp-adm.k3s-ia-lab.lan rabbitmq.k3s-ia-lab.lan open-webui.k3s-ia-lab.lan auth.k3s-ia-lab.lan onedev.k3s-ia-lab.lan
 ```
 
 rabbitmq:
@@ -113,7 +124,7 @@ ollama:
 - no apikey
 - volume mount /mnt/data/ollama
 
-postgres with pgvector extension:
+postgres with pgvector extension: [postgres README.md](postgresql/README.md)
  - dns host: postgres-lb.k3s-ia-lab.svc.cluster.local (k8s internal)
  - ip <your-k3s-ipv4>
  - port: 5432
