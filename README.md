@@ -138,6 +138,9 @@ open-webui (needs keycloak with k3s-ia-lab realm, user added to realm, create op
 - url http://open-webui.k3s-ia-lab.lan/
 - volume mount /mnt/data/open-webui
 
+mcp inspector:
+- url http://mcp-inspector.k3s-ia-lab.lan
+
 [onedev README.md](onedev/README.md)
 
 ---
@@ -150,10 +153,18 @@ The openfire image is a custom build with pre-configured settings for easier set
 
 ---
 
-Wanted features:
+TODO:
+
+- grafana
+- split docs per service
+- supabase
+- flowise
+- chatwoot
+- evolution api
+- dify
+- typebot
 - migrate bare metal to run inside proxmox vm with pci-e passthrough of nvidia gpu.
 - custom ubuntu container with dev, ops, network tools, ia-console tools.
 - ssh-mcp-server (allow LLM to access the custom ubuntu container via ssh)
 - playright test runner container
 - playright mcp server (allow LLM to execute the playright test runner)
-- n8n sso with keycloak (https://github.com/PavelSozonov/n8n-community-sso)
