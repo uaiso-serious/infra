@@ -1,0 +1,91 @@
+apiVersion: v1
+kind: Namespace
+metadata:
+  name: open-webui
+---
+---
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: open-webui
+  namespace: open-webui
+  labels:
+    app: open-webui
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: open-webui
+  template:
+    metadata:
+      labels:
+        app: open-webui
+    spec:
+      containers:
+        - name: open-webui-container
+          image: ghcr.io/open-webui/open-webui:v0.6.41
+          ports:
+            - containerPort: 8080
+              name: http
+              protocol: TCP
+          env:
+            - name: OLLAMA_BASE_URL
+              value: "http://ollama-service.k3s-ia-lab.svc.cluster.local:11434"
+            - name: WEBUI_URL
+              value: "http://open-webui.k3s-ia-lab.lan/"
+            - name: OPENID_PROVIDER_URL
+              value: "http://auth.k3s-ia-lab.lan/realms/k3s-ia-lab/.well-known/openid-configuration"
+            - name: OAUTH_CLIENT_ID
+              value: "open-webui-client"
+            - name: OAUTH_CLIENT_SECRET
+              value: "**********"
+            - name: ENABLE_OAUTH_SIGNUP
+              value: "true"
+            - name: OAUTH_PROVIDER_NAME
+              value: "Keycloak"
+            - name: OAUTH_SCOPES
+              value: "openid email profile"
+            - name: OPENID_REDIRECT_URI
+              value: "http://open-webui.k3s-ia-lab.lan/oauth/oidc/callback"
+            - name: DEFAULT_USER_ROLE
+              value: "admin"
+            - name: WEBUI_AUTH_SIGNOUT_REDIRECT_URL
+              value: "http://open-webui.k3s-ia-lab.lan"
+            - name: ENABLE_PASSWORD_AUTH
+              value: "false"
+            - name: ENABLE_LOGIN_FORM
+              value: "false"
+            - name: OAUTH_MERGE_ACCOUNTS_BY_EMAIL
+              value: "true"
+            - name: DATABASE_TYPE
+              value: "postgres"
+            - name: DATABASE_USER
+              value: "postgres"
+            - name: DATABASE_PASSWORD
+              value: "mysecurepassword"
+            - name: DATABASE_HOST
+              value: "postgres-lb.k3s-ia-lab.svc.cluster.local"
+            - name: DATABASE_PORT
+              value: "5432"
+            - name: DATABASE_NAME
+              value: "openwebui"
+            - name: PGVECTOR_DB_URL
+              value: "postgresql://postgres:mysecurepassword@postgres-lb.k3s-ia-lab.svc.cluster.local:5432/openwebuipgvector"
+            - name: VECTOR_DB
+              value: pgvector
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: open-webui-service
+  namespace: open-webui
+  labels:
+    app: open-webui
+spec:
+  type: ClusterIP
+  ports:
+    - port: 8080
+      targetPort: 8080
+      protocol: TCP
+  selector:
+    app: open-webui
