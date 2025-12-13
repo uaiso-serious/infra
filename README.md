@@ -71,12 +71,12 @@ The openfire image is a custom build with pre-configured settings for easier set
 ---
 
 Other services:
-[grafana](grafana/README.md)
-[keycloak](keycloak/README.md)
-[mcp-inspector](mcp-inspector/README.md)
-[onedev](onedev/README.md)
-[open-webui](open-webui/README.md)
-[zabbix](zabbix/README.md)
+- [grafana](grafana/README.md)
+- [keycloak](keycloak/README.md)
+- [mcp-inspector](mcp-inspector/README.md)
+- [onedev](onedev/README.md)
+- [open-webui](open-webui/README.md)
+- [zabbix](zabbix/README.md)
 
 ---
 
