@@ -1,0 +1,103 @@
+apiVersion: v1
+kind: Namespace
+metadata:
+  name: mcp-inspector
+---
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: inspector
+  namespace: mcp-inspector
+  labels:
+    app: inspector
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: inspector
+  template:
+    metadata:
+      labels:
+        app: inspector
+    spec:
+      containers:
+        - name: inspector
+          image: ghcr.io/modelcontextprotocol/inspector:0.17.5
+          env:
+            - name: HOST
+              value: "0.0.0.0"
+            - name: ALLOWED_ORIGINS
+              value: "http://mcp-inspector.k3s-ia-lab.lan"
+            - name: DANGEROUSLY_OMIT_AUTH
+              value: "true"
+            - name: MCP_AUTO_OPEN_ENABLED
+              value: "false"
+          ports:
+            - containerPort: 6274
+              protocol: TCP
+            - containerPort: 6277
+              protocol: TCP
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: inspector-service
+  namespace: mcp-inspector
+  labels:
+    app: inspector
+spec:
+  type: ClusterIP
+  selector:
+    app: inspector
+  ports:
+    - name: http
+      port: 6274
+      targetPort: 6274
+      protocol: TCP
+    - name: extra
+      port: 6277
+      targetPort: 6277
+      protocol: TCP
+---
+apiVersion: traefik.io/v1alpha1
+kind: Middleware
+metadata:
+  name: inspector-redirect
+  namespace: mcp-inspector
+spec:
+  redirectRegex:
+    regex: ^(https?://)mcp-inspector\.k3s-ia-lab\.lan/?$
+    replacement: ${1}mcp-inspector.k3s-ia-lab.lan/?MCP_PROXY_FULL_ADDRESS=http://mcp-inspector-proxy.k3s-ia-lab.lan/
+    permanent: true
+---
+apiVersion: networking.k8s.io/v1
+kind: Ingress
+metadata:
+  name: inspector
+  namespace: mcp-inspector
+  annotations:
+    traefik.ingress.kubernetes.io/router.entrypoints: web
+    traefik.ingress.kubernetes.io/router.middlewares: mcp-inspector-inspector-redirect@kubernetescrd
+    traefik.ingress.kubernetes.io/router.priority: "100"
+spec:
+  rules:
+    - host: mcp-inspector.k3s-ia-lab.lan
+      http:
+        paths:
+          - path: /
+            pathType: Prefix
+            backend:
+              service:
+                name: inspector-service
+                port:
+                  number: 6274
+    - host: mcp-inspector-proxy.k3s-ia-lab.lan
+      http:
+        paths:
+          - path: /
+            pathType: Prefix
+            backend:
+              service:
+                name: inspector-service
+                port:
+                  number: 6277
