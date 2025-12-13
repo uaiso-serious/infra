@@ -336,4 +336,13 @@ spec:
                 name: openfire-service
                 port:
                   number: 7070
-
+    - host: ollama.k3s-ia-lab.lan
+      http:
+        paths:
+          - path: /
+            pathType: Prefix
+            backend:
+              service:
+                name: ollama-service
+                port:
+                  number: 11434

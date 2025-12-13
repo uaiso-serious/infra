@@ -48,13 +48,13 @@ K3s namespace k3s-ia-lab deployments/statefulsets:
 | service  readme                | http ingress                                                |
 |--------------------------------|-------------------------------------------------------------|
 | [n8n](n8n/README.md)           | http://n8n.k3s-ia-lab.lan/                                  |
-| [ollama](ollama/README.md)     |                                                             |
+| [ollama](ollama/README.md)     | http://ollama.k3s-ia-lab.lan                                |
 | [openfire](openfire/README.md) | http://xmpp.k3s-ia-lab.lan/ http://xmpp-adm.k3s-ia-lab.lan/ |
 | [rabbitmq](rabbitmq/README.md) | http://rabbitmq.k3s-ia-lab.lan                              |
 
 /etc/hosts file entrie to access the ingress routes from your local network:
 ```
-<your-k3s-ipv4> n8n.k3s-ia-lab.lan xmpp.k3s-ia-lab.lan xmpp-adm.k3s-ia-lab.lan rabbitmq.k3s-ia-lab.lan
+<your-k3s-ipv4> n8n.k3s-ia-lab.lan ollama.k3s-ia-lab.lan xmpp.k3s-ia-lab.lan xmpp-adm.k3s-ia-lab.lan rabbitmq.k3s-ia-lab.lan
 ```
 ---
 
