@@ -28,6 +28,10 @@ home lab bare metal specs:
 - Ubuntu Server 24.04 LTS
 - k3s v1.33.6+k3s1 (b5847677)
 
+[nvidia](nvidia/README.md) instructions
+
+[k3s](k3s/README.md) instructions
+
 create postgresql with pgvector extension
 ```bash
 kubectl apply -f  postgresql/postgresql.yaml
@@ -63,6 +67,16 @@ notes...
 Don't expose this setup to the internet, it's for home lab use only. There's no security configured, no tls activated.
 
 The openfire image is a custom build with pre-configured settings for easier setup.
+
+---
+
+Other services:
+[grafana](grafana/README.md)
+[keycloak](keycloak/README.md)
+[mcp-inspector](mcp-inspector/README.md)
+[onedev](onedev/README.md)
+[open-webui](open-webui/README.md)
+[zabbix](zabbix/README.md)
 
 ---
 
