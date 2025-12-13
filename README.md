@@ -41,9 +41,6 @@ K3s namespace k3s-ia-lab deployments/statefulsets:
 - keycloak
 - open-webui
 
-install Ubuntu 24.04 NVIDIA drivers:
-https://projectable.me/ubuntu-24-04-nvidia-drivers-ollama/
-
 Install k3s
 https://docs.k3s.io/installation
 
