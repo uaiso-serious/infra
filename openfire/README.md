@@ -1,4 +1,4 @@
-openfire [openfire README.md](openfire/README.md):
+openfire
 - ip: xmpp.k3s-ia-lab.lan
 - url xmpp: http://xmpp.k3s-ia-lab.lan/
 - url adm: http://xmpp-adm.k3s-ia-lab.lan/

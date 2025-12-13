@@ -47,14 +47,14 @@ deploy the k3s-ia-lab manifests:
 kubectl apply -f k3s-ia-lab.yaml
 ```
 
-K3s namespace k3s-ia-lab deployments/statefulsets:
+K3s namespace k3s-ia-lab deployments/statefulsets setup order:
 
 | service  readme                | http ingress                                                |
 |--------------------------------|-------------------------------------------------------------|
-| [n8n](n8n/README.md)           | http://n8n.k3s-ia-lab.lan/                                  |
 | [ollama](ollama/README.md)     | http://ollama.k3s-ia-lab.lan                                |
 | [openfire](openfire/README.md) | http://xmpp.k3s-ia-lab.lan/ http://xmpp-adm.k3s-ia-lab.lan/ |
 | [rabbitmq](rabbitmq/README.md) | http://rabbitmq.k3s-ia-lab.lan                              |
+| [n8n](n8n/README.md)           | http://n8n.k3s-ia-lab.lan/                                  |
 
 /etc/hosts file entrie to access the ingress routes from your local network:
 ```

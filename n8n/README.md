@@ -1,4 +1,4 @@
-n8n: [n8n README.md](n8n/README.md)
+n8n:
 - url: http://n8n.k3s-ia-lab.lan/
 - volume mount /mnt/data/n8n
 

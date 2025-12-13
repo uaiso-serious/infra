@@ -1,5 +1,6 @@
-ollama [ollama README.md](ollama/README.md):
+ollama:
 - url: http://ollama-service.k3s-ia-lab.svc.cluster.local:11434 (k8s internal)
+- http ingress: http://ollama.k3s-ia-lab.lan (external access)
 - no apikey
 - volume mount /mnt/data/ollama
 
