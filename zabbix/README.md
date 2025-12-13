@@ -1,3 +1,15 @@
+create zabbix
+```bash
+kubectl apply -f zabbix.yaml
+```
+
+/etc/hosts file entrie to access keycloak ingress route from your local network:
+```
+<your-k3s-ipv4> zabbix.k3s-ia-lab.lan
+```
+
+http://zabbix.k3s-ia-lab.lan
+
 https://www.zabbix.com/download?zabbix=7.4&os_distribution=ubuntu&os_version=24.04&components=agent_2&db=&ws=
 
 ```bash

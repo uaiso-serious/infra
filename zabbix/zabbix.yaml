@@ -26,7 +26,7 @@ spec:
           imagePullPolicy: IfNotPresent
           env:
             - name: DB_SERVER_HOST
-              value: "postgres-lb.k3s-ia-lab.svc.cluster.local"
+              value: "postgres-lb.postgresql.svc.cluster.local"
             - name: POSTGRES_USER
               value: "postgres"
             - name: POSTGRES_PASSWORD
@@ -75,7 +75,7 @@ spec:
           image: zabbix/zabbix-web-apache-pgsql:ubuntu-7.4.5
           env:
             - name: DB_SERVER_HOST
-              value: "postgres-lb.k3s-ia-lab.svc.cluster.local"
+              value: "postgres-lb.postgresql.svc.cluster.local"
             - name: POSTGRES_USER
               value: "postgres"
             - name: POSTGRES_PASSWORD
@@ -105,3 +105,23 @@ spec:
     - port: 8080
       targetPort: 8080
       protocol: TCP
+---
+apiVersion: networking.k8s.io/v1
+kind: Ingress
+metadata:
+  name: zabbix
+  namespace: zabbix
+  annotations:
+    traefik.ingress.kubernetes.io/router.entrypoints: web
+spec:
+  rules:
+    - host: zabbix.k3s-ia-lab.lan
+      http:
+        paths:
+          - path: /
+            pathType: Prefix
+            backend:
+              service:
+                name: zabbix-web-service
+                port:
+                  number: 8080
