@@ -28,9 +28,9 @@ home lab bare metal specs:
 - Ubuntu Server 24.04 LTS
 - k3s v1.33.6+k3s1 (b5847677)
 
-[nvidia](_setup/baremetal/README.md)
+[nvidia](_setup/baremetal/README.md) instructions
 
-[k3s](k3s/README.md) instructions
+[k3s](_setup/k3s/README.md) instructions
 
 create postgresql with pgvector extension
 ```bash
