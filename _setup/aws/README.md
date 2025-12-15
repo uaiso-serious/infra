@@ -82,3 +82,5 @@ This is a working progress setup
 
 - warning messages when installing helm nvidia/gpu-operator
 - ollama crashed inside pod when trying to run llama3.2:3b, need more investigation, but can use the ollama docker directly for now
+
+https://medium.com/sparque-labs/serving-ai-models-on-the-edge-using-nvidia-gpu-with-k3s-on-aws-part-4-dd48f8699116
