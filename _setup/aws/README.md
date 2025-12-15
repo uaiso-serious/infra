@@ -24,24 +24,43 @@ git clone https://github.com/k3s-ia-lab/infra.git
 sudo reboot
 ```
 
+find your nvme device with 120GB:
+```bash
+lsblk
+```
+```text
+NAME          MAJ:MIN RM   SIZE RO TYPE MOUNTPOINTS
+nvme0n1       259:0    0     8G  0 disk
+├─nvme0n1p1   259:2    0     8G  0 part /
+├─nvme0n1p127 259:3    0     1M  0 part
+└─nvme0n1p128 259:4    0    10M  0 part /boot/efi
+nvme1n1       259:1    0 116.4G  0 disk
+└─nvme1n1p1   259:6    0 116.4G  0 part
+```
+
+create filesystem on /dev/nvme1n1 an changes for docker data:
+```bash
+parted /dev/nvme1n1 mklabel gpt mkpart primary ext4 0% 100%
+mkfs.ext4 /dev/nvme1n1p1
+blkid /dev/nvme1n1p1 | awk -F'[" ]' '/UUID/ {print "UUID="$3" /mnt ext4 defaults 0 2"}' >> /etc/fstab
+mount /mnt
+mkdir -p /mnt/docker-data
+jq '. + {"data-root": "/mnt/docker-data"}' /etc/docker/daemon.json | sudo tee /etc/docker/daemon.json > /dev/null
+systemctl restart docker
+```
+
+
 check nvidia installation:
 ```bash
 nvidia-smi
-/usr/local/cuda/bin/nvcc -V
 nvidia-container-cli -V
-sudo docker run --rm --runtime=nvidia --gpus all public.ecr.aws/amazonlinux/amazonlinux:2023 nvidia-smi
+docker run --rm --runtime=nvidia --gpus all public.ecr.aws/amazonlinux/amazonlinux:2023 nvidia-smi
 ```
 
 another check:
 ```bash
-sudo docker run --rm --runtime=nvidia --gpus all nvcr.io/nvidia/k8s/cuda-sample:devicequery
+docker run --rm --runtime=nvidia --gpus all nvcr.io/nvidia/k8s/cuda-sample:devicequery
 ```
-
-setup k3s:
-```bash
-sudo ./infra/_setup/aws/k3s-ia-lab-aws-al2023.sh
-```
-edit /etc/fstab to automount  /dev/nvme0n1p1 into /mnt after rebooting
 
 test ollama container (can't run with 8gb of volume mount, must change docker data to /mnt/docker-data)
 ```bash
@@ -50,11 +69,16 @@ docker exec -it ollama ollama run llama3.2:3b
 docker stop ollama
 ```
 
+setup k3s:
+```bash
+sudo ./infra/_setup/aws/k3s-ia-lab-aws-al2023.sh
+```
+edit /etc/fstab to automount  /dev/nvme0n1p1 into /mnt after rebooting
+
 ---
 # Notes
 
 This is a working progress setup
 
-- probably missing stuff inside [k3s-ia-lab-aws-al2023.sh](k3s-ia-lab-aws-al2023.sh) script
 - warning messages when installing helm nvidia/gpu-operator
-- ollama crashed inside pod when trying to run llama3.2:3b
+- ollama crashed inside pod when trying to run llama3.2:3b, need more investigation, but can use the ollama docker directly for now

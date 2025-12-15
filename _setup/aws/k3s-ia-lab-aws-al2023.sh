@@ -1,8 +1,5 @@
 #!/bin/bash
 
-parted /dev/nvme0n1 mklabel gpt mkpart primary ext4 0% 100%
-mkfs.ext4 /dev/nvme0n1p1
-mount /dev/nvme0n1p1 /mnt
 mkdir -p /mnt/k3s-data
 mkdir -p /mnt/data/{n8n,ollama}
 chmod -R 777 /mnt/data
@@ -13,8 +10,9 @@ curl -fsSL -o get_helm.sh https://raw.githubusercontent.com/helm/helm/main/scrip
 chmod 700 get_helm.sh
 ./get_helm.sh
 
-mkdir -p /home/ec2-user/.kube
+mkdir -p /home/ec2-user/.kube /root/.kube
 cp /etc/rancher/k3s/k3s.yaml /home/ec2-user/.kube/config
+cp /etc/rancher/k3s/k3s.yaml /root/.kube/config
 chown -R ec2-user:ec2-user /home/ec2-user/.kube
 chown ec2-user:ec2-user /etc/rancher/k3s/k3s.yaml
 
