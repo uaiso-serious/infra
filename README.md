@@ -84,7 +84,6 @@ Other services:
 
 TODO:
 
-- kubeshark
 - supabase
 - flowise
 - chatwoot
