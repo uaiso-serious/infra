@@ -82,6 +82,7 @@ TODO:
 - migrate bare metal to run inside proxmox vm with pci-e passthrough of nvidia gpu.
 - helm charts for all services.
 - automate server setup scripts using the helmcharts with --wait.
+- upgrade n8n to 2.x.
 - supabase
 - flowise
 - chatwoot
