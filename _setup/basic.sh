@@ -32,4 +32,4 @@ kubectl apply -f ./infra/_setup/k3s/coredns-custom.yaml
 
 kubectl apply -f ./infra/postgresql/pgvector.yaml
 kubectl rollout status statefulset/postgres -n postgresql
-kubectl apply -f uaiso.yaml
+kubectl apply -f ./infra/uaiso.yaml
