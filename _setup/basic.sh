@@ -33,3 +33,8 @@ kubectl apply -f ./infra/_setup/k3s/coredns-custom.yaml
 kubectl apply -f ./infra/postgresql/pgvector.yaml
 kubectl rollout status statefulset/postgres -n postgresql
 kubectl apply -f ./infra/uaiso.yaml
+
+cp /etc/rancher/k3s/k3s.yaml /root/.kube/config
+
+wget https://github.com/derailed/k9s/releases/download/v0.32.5/k9s_linux_amd64.deb
+dpkg -i k9s_linux_amd64.deb

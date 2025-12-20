@@ -72,7 +72,7 @@ When it's running, is possible to "talk" with Ollama using jabber/xmpp client us
 
 # Quick start deployment instructions:
 
-run the following commands to deploy the working setup:
+run the following commands as root to deploy the working setup:
 
 ```bash
 git clone https://github.com/uaiso-serious/infra.git
