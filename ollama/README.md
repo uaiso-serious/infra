@@ -49,6 +49,10 @@ requirements:
 - Ollama gpu list: https://docs.ollama.com/gpu
 - [nvidia instructions](../_setup/baremetal/README.md)
 
+Choose your model by size:
+
+https://uaiso-serious.github.io/ollama-helper/
+
 Example: pull the llama3.2 3b model:
 
 ```bash
