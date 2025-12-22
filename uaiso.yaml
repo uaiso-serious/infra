@@ -214,6 +214,22 @@ spec:
       containers:
         - name: n8n
           image: docker.n8n.io/n8nio/n8n:1.123.7
+          readinessProbe:
+            httpGet:
+              path: /healthz
+              port: 5678
+            initialDelaySeconds: 15
+            periodSeconds: 10
+            timeoutSeconds: 5
+            failureThreshold: 3
+
+          livenessProbe:
+            httpGet:
+              path: /healthz
+              port: 5678
+            initialDelaySeconds: 30
+            periodSeconds: 20
+            failureThreshold: 5
           env:
             - name: N8N_SECURE_COOKIE
               value: "false"
