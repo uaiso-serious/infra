@@ -26,7 +26,7 @@ key from authorized_keys.
 - you have a pihole or similar dns server in your home network
 - you have a local dns server (bind, unbound, etc)
 
-## Option 3: You are admin of your computer
+## Option 2: You are admin of your computer
 
 - you can put one entrie to your computer's hosts file (/etc/hosts in linux/macos, C:\Windows\System32\drivers\etc\hosts
   in windows)
@@ -35,7 +35,7 @@ key from authorized_keys.
 <your-k3s-ipv4> n8n.uaiso.lan ollama.uaiso.lan xmpp.uaiso.lan xmpp-adm.uaiso.lan rabbitmq.uaiso.lan grafana.uaiso.lan auth.uaiso.lan ks.uaiso.lan mcp-inspector.uaiso.lan mcp-inspector-proxy.uaiso.lan onedev.uaiso.lan open-webui.uaiso.lan zabbix.uaiso.lan
 ```
 
-## Option 4: Create your own ssh tunnel with dynamic port forwarding
+## Option 3: Create your own ssh tunnel with dynamic port forwarding
 
 ```bash
 ssh -D 1080 -N youruser@<your-k3s-ipv4>
@@ -43,13 +43,13 @@ ssh -D 1080 -N youruser@<your-k3s-ipv4>
 
 Then configure your browser to use a socks5 proxy on localhost:1080
 
-## Option 5: Use a VPN that allows custom dns entries
+## Option 4: Use a VPN that allows custom dns entries
 
 - create a vpn service like openvpn, wireguard, tinc, etc
 - configure the vpn server to push custom dns entries for *.uaiso.lan to the clients
 - connect your computer to the vpn
 
-## Option 6: Use a proxy service that allows custom dns entries
+## Option 5: Use a proxy service that allows custom dns entries
 
 - create a proxy service like sshuttle, squid, etc
 - configure the proxy server to resolve custom dns entries for *.uaiso.lan
