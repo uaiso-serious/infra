@@ -15,3 +15,6 @@ ROADMAP:
 - ssh-mcp-server (allow LLM to access the custom ubuntu container via ssh)
 - playright test runner container
 - playright mcp server (allow LLM to execute the playright test runner)
+- try https://www.talos.dev/ inside proxmox
+- buy better hardware to run https://localai.io/ project.
+- buy 16gb vram nvidia gpu to run diffusion models locally.
