@@ -18,3 +18,4 @@ ROADMAP:
 - try https://www.talos.dev/ inside proxmox
 - buy better hardware to run https://localai.io/ project.
 - buy 16gb vram nvidia gpu to run diffusion models locally.
+- try https://runcode.io/
