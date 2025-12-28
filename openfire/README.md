@@ -1,9 +1,9 @@
 openfire
 
-- ip: xmpp.uaiso.lan
+- ip: &lt;your-k3s-ipv4&gt;
 - url xmpp: http://xmpp.uaiso.lan/
 - url adm: http://xmpp-adm.uaiso.lan/
-- ports: 5222 tcp/xmpp
+- port: 5222 tcp/xmpp
 - user: admin
 - password: admin
 

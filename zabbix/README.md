@@ -4,12 +4,6 @@ create zabbix
 kubectl apply -f zabbix.yaml
 ```
 
-/etc/hosts file entrie to access zabbix ingress route from your local network:
-
-```
-<your-k3s-ipv4> zabbix.uaiso.lan
-```
-
 http://zabbix.uaiso.lan
 
 https://www.zabbix.com/download?zabbix=7.4&os_distribution=ubuntu&os_version=24.04&components=agent_2&db=&ws=

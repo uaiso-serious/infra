@@ -1,6 +1,6 @@
 Connection details postgresql:
 - dns host: postgresql.postgresql.svc.cluster.local (k8s internal)
-- ip <your-k3s-ipv4>
+- ip &lt;your-k3s-ipv4&gt;
 - port: 5432
 - user: postgres
 - password: mysecurepassword
