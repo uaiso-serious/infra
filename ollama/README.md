@@ -49,7 +49,12 @@ requirements:
 - Ollama gpu list: https://docs.ollama.com/gpu
 - [nvidia instructions](../_setup/baremetal/README.md)
 
-Choose your model by size:
+Deploy ollama with gpu support:
+```bash
+kubectl apply -f ollama-with-gpu.yaml
+```
+
+Choose your model by size to fit your gpu vram:
 
 https://uaiso-serious.github.io/ollama-helper/
 

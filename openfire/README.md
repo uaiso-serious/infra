@@ -7,8 +7,6 @@ openfire
 - user: admin
 - password: admin
 
-Needs to create xmpp users, and add friends to test messaging:
-
 using restApi plugin:
 
 readiness check:
