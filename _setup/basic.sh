@@ -89,6 +89,11 @@ curl \
 kubectl -n uaiso delete pod openfire-0
 kubectl -n uaiso rollout status statefulset/openfire
 
+kubectl -n uaiso rollout status statefulset/ollama
+kubectl -n uaiso exec ollama-0 -- bash -c "ollama pull gemma3:270m"
+
+kubectl -n uaiso rollout status deployment/rabbitmq
+
 kubectl -n uaiso rollout status statefulset/n8n
 kubectl -n uaiso exec n8n-0 -- ash -c "git clone https://github.com/uaiso-serious/infra.git /tmp/infra"
 kubectl -n uaiso exec n8n-0 -- ash -c "n8n import:entities --truncateTables --inputDir=/tmp/infra/n8n/entities --keyFile=/tmp/infra/n8n/keyfile.txt"
