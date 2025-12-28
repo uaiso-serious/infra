@@ -105,8 +105,6 @@ Configure your browser to use a socks5 proxy to access the ingress routes, point
 Easy proxy stuff with [FoxyProxy for Chrome](https://chromewebstore.google.com/search/foxyproxy)
 or [FoxyProxy for Firefox](https://addons.mozilla.org/en-US/firefox/addon/foxyproxy-standard/)
 
-Check [k3s readme](_setup/k3s/README.md) for more detailed DNS configuration instructions for DNS ninjas.
-
 Open http://xmpp.uaiso.lan/ login as admin/admin, say hi to severino bot.
 
 ---
@@ -131,6 +129,8 @@ The openfire image is a custom build with pre-configured settings for easier set
 
 It's possible to use another chat integration instead of xmpp/openfire, like discord, slack, telegram, whatsapp, etc.
 Just change the n8n workflow to use the desired chat node.
+
+Check [k3s readme](_setup/k3s/README.md) for more detailed DNS configuration instructions for DNS ninjas.
 
 ---
 
