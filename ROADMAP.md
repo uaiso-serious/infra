@@ -2,7 +2,6 @@
 ROADMAP:
 
 - migrate bare metal to run inside proxmox vm with pci-e passthrough of nvidia gpu.
-- automate server setup scripts.
 - upgrade n8n to 2.x.
 - supabase
 - flowise
