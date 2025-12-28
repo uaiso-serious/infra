@@ -102,7 +102,7 @@ kubectl -n uaiso exec n8n-0 -- ash -c "n8n import:credentials --separate --input
 kubectl -n uaiso exec n8n-0 -- ash -c "n8n import:workflow --separate --input=/tmp/infra/n8n/workflows"
 
 # fix pgsql to activate workflow https://github.com/n8n-io/n8n/issues/21210
-kubectl -n postgresql exec -it postgres-0 -- psql -U postgres n8n < infra/n8n/workflow_history_fix.sql
+kubectl -n postgresql exec -i postgres-0 -- psql -U postgres n8n < infra/n8n/workflow_history_fix.sql
 
 kubectl -n uaiso exec n8n-0 -- ash -c "n8n update:workflow --id=rAczBsYXmwUPlMg2 --active=true"
 kubectl -n uaiso delete pod n8n-0
