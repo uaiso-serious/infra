@@ -100,7 +100,7 @@ git clone https://github.com/uaiso-serious/infra.git
 Takes about 10 minutes to download container images and LLM models depending on your internet speed. You can use k9s
 command to check the pod status.
 
-Configure your browser to use a socks5 proxy to access the ingress routes, point it to <your-k3s-ipv4> port 1080.
+Configure your browser to use a socks5 proxy to access the ingress routes, point it to &lt;your-k3s-ipv4&gt; port 1080.
 
 Easy proxy stuff with [FoxyProxy for Chrome](https://chromewebstore.google.com/search/foxyproxy)
 or [FoxyProxy for Firefox](https://addons.mozilla.org/en-US/firefox/addon/foxyproxy-standard/)
