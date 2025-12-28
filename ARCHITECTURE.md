@@ -14,7 +14,7 @@ data privacy concerns while simulating enterprise-grade workflows.
 | **Inference**    | **Ollama**          | Serves as the local engine for open-source models (e.g., Llama 3), offering a robust API for integration without external dependencies.                                        |
 | **Automation**   | **n8n**             | Acts as the "brain" of the operation, allowing the orchestration of complex AI agents and multi-step logic through a visual workflow interface.                                |
 | **Messaging**    | **Openfire (XMPP)** | Provides a standardized, federated messaging protocol to test AI-to-Human communication in a real-time environment.                                                            |
-| **Broker**       | **RabbitMQ**        | **Crucial Middleware:** Acts as the message broker for the `n8n-node-xmpp`, ensuring reliable delivery and decoupling the n8n logic from the XMPP connection.                  |
+| **Broker**       | **RabbitMQ**        | **Crucial Middleware:** Acts as the message broker for the `n8n-node-xmpp`, ensuring reliable delivery.                                                                        |
 | **Frontend**     | **xmppweb**         | A modern web interface that allows for a seamless "Chat-style" experience using the local XMPP infrastructure.                                                                 |
 
 ---
