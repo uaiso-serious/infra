@@ -68,7 +68,7 @@ spec:
                 - /opt/readiness.sh
             initialDelaySeconds: 20
             periodSeconds: 10
-            timeoutSeconds: 5
+            timeoutSeconds: 20
             failureThreshold: 3
           env:
             - name: FQDN
