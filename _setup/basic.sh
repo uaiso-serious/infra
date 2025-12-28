@@ -107,4 +107,4 @@ kubectl -n postgresql exec -it postgres-0 -- psql -U postgres n8n < infra/n8n/wo
 kubectl -n uaiso exec n8n-0 -- ash -c "n8n update:workflow --id=rAczBsYXmwUPlMg2 --active=true"
 kubectl -n uaiso delete pod n8n-0
 kubectl -n uaiso rollout status statefulset/n8n
-echo "--- Hello world setup complete! Say hi to severino bot on XMPP!"'
+echo "--- Hello world setup complete! Say hi to severino bot on XMPP!"
