@@ -120,8 +120,9 @@ Open http://xmpp.uaiso.lan/ login as admin/admin, say hi to severino bot.
 
 # Notes
 
-**Don't expose this setup to the internet**! It's for home lab use only. There's no security configured, no tls
-activated. Default service ports and weak default passwords are used.
+If you want to expose this setup to the internet, **don't forget to enable tls, and change the default passwords**.
+
+Or just use ssh tunnels/vpn to access it remotely in a secure way.
 
 It's possible to use another chat integration instead of xmpp/openfire, like discord, slack, telegram, whatsapp, etc.
 Just change the n8n workflow to use the desired chat node.
@@ -130,7 +131,7 @@ Check [k3s readme](_setup/k3s/README.md) for more detailed DNS configuration ins
 
 ---
 
-# My personal home lab bare metal specs (10+ yo computer with nvidia gpu):
+# My personal home lab bare metal specs:
 
 - Intel(R) Core(TM) i7-3770 CPU @ 3.40GHz
 - 16 GB RAM DDR3 (Using about 3.2GB)

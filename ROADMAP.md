@@ -3,19 +3,21 @@ ROADMAP:
 
 - migrate bare metal to run inside proxmox vm with pci-e passthrough of nvidia gpu.
 - upgrade n8n to 2.x.
-- split setup scripts, k3s install, and k3s deployments.
 - supabase
 - flowise
 - chatwoot
 - evolution api
 - dify
 - typebot
+- vllm
+- aws bedrock
+- jupiter notebook
 - more db vectors for RAG labs: Qdrant and Milvus
 - custom ubuntu container with dev, ops, network tools, ia-console tools.
 - ssh-mcp-server (allow LLM to access the custom ubuntu container via ssh)
 - playright test runner container
 - playright mcp server (allow LLM to execute the playright test runner)
-- try https://www.talos.dev/ inside proxmox
-- buy better hardware to run https://localai.io/ project.
-- buy 16gb vram nvidia gpu to run diffusion models locally.
-- try https://runcode.io/
+- https://www.talos.dev/ inside proxmox
+- https://localai.io/
+- https://jan.ai/
+- https://runcode.io/ cheap host
