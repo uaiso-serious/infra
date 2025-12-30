@@ -39,7 +39,7 @@ I really recommend using a separate machine or vm for this setup, don't use your
 
 ---
 
-# Quick start instructions (vm or baremetal):
+# Quick start hello world instructions (vm or baremetal):
 
 [docker setup](_setup/docker/README.md) also available.
 
@@ -61,6 +61,8 @@ or [FoxyProxy for Firefox](https://addons.mozilla.org/en-US/firefox/addon/foxypr
 Open http://xmpp.uaiso.lan/ login as admin/admin
 
 Say hi to severino bot.
+
+Congratulations, you have the [HELLO_WORLD.md](HELLO_WORLD.md) running.
 
 ---
 
