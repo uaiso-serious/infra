@@ -18,7 +18,10 @@ ROADMAP:
 - playright test runner container
 - playright mcp server (allow LLM to execute the playright test runner)
 - https://www.talos.dev/ inside proxmox
-- https://localai.io/
-- https://jan.ai/
-- https://runcode.io/ cheap host
 - nip.io for dynamic dns
+- anythingLLM
+- whisper whisperx
+- stable diffusion webui
+- privateGPT
+- librechat
+- comfyUI
