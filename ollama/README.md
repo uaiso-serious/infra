@@ -3,6 +3,11 @@ ollama:
 - url: http://ollama-service.uaiso.svc.cluster.local:11434 (k8s internal)
 - http ingress: http://ollama.uaiso.lan
 - no apikey
+---
+
+Tool to look models by size:
+
+https://uaiso-serious.github.io/ollama-helper/
 
 ---
 
