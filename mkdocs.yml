@@ -1,0 +1,5 @@
+site_name: UaiSo Serious
+nav:
+  - Home: index.md
+  - About: about.md
+theme: readthedocs

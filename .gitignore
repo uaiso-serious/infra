@@ -2,3 +2,4 @@
 temp.yaml
 .debug
 postgresql/backup
+.venv
