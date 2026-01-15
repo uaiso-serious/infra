@@ -1,3 +1,9 @@
+# Documentation
+
+https://uaiso-serious.github.io/infra
+
+---
+
 # TL;DR
 
 - This is a home lab k3s deployment for AI experimentation.
