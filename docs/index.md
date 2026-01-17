@@ -57,8 +57,10 @@ VRAM, it will be much faster.
 
 #### Ai hardware
 
-There are specialized AI accelerators like Google's TPU, and other companies are developing their own AI chips. These
-can offer significant performance improvements for specific AI tasks like vision, text to speech, audio processing.
+There are specialized AI accelerators like Google's TPU, Coral Edge TPU, Rapberry AI HAT (Hailo AI chip), and other 
+companies are developing their own AI chips. These can offer significant performance improvements for specific AI tasks 
+like vision, text to speech, audio processing.
+
 One promising option is [https://tenstorrent.com/](https://tenstorrent.com/). I hope one day tenstorrent hardware and
 filosofy beats NVIDIA's empire.
 

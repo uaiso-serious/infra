@@ -5,4 +5,4 @@ Resistance study groups
 - https://localai.io/
 - https://jan.ai/
 - https://github.com/ray-project/ray
-- 
+- https://github.com/hailo-ai/hailo-apps

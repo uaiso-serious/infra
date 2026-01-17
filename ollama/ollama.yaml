@@ -33,7 +33,6 @@ spec:
         app: ollama
     spec:
       restartPolicy: Always
-      runtimeClassName: nvidia
       containers:
         - name: ollama-container
           image: ollama/ollama:0.13.2
@@ -52,13 +51,7 @@ spec:
             failureThreshold: 3
           resources:
             limits:
-              nvidia.com/gpu: 1
-              memory: "4Gi"
-          env:
-            - name: NVIDIA_VISIBLE_DEVICES
-              value: all
-            - name: NVIDIA_DRIVER_CAPABILITIES
-              value: all
+              memory: "1Gi"
           volumeMounts:
             - name: ollama-data
               mountPath: /root/.ollama

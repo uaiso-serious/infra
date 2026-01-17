@@ -1,13 +1,18 @@
 apiVersion: v1
-kind: Namespace
+kind: ConfigMap
 metadata:
-  name: postgresql
+  name: postgres-initdb
+  namespace: uaiso
+data:
+  init.sql: |
+    CREATE DATABASE openfire;
+    CREATE DATABASE n8n;
 ---
 apiVersion: apps/v1
 kind: StatefulSet
 metadata:
   name: postgres
-  namespace: postgresql
+  namespace: uaiso
   labels:
     app: postgres
 spec:
@@ -51,13 +56,16 @@ spec:
         - name: postgres-data
           persistentVolumeClaim:
             claimName: postgres-data
+        - name: initdb
+          configMap:
+            name: postgres-initdb
 
 ---
 apiVersion: v1
 kind: Service
 metadata:
   name: postgresql
-  namespace: postgresql
+  namespace: uaiso
 spec:
   selector:
     app: postgres
@@ -71,7 +79,7 @@ apiVersion: v1
 kind: PersistentVolumeClaim
 metadata:
   name: postgres-data
-  namespace: postgresql
+  namespace: uaiso
 spec:
   accessModes:
     - ReadWriteOnce

@@ -1,6 +1,6 @@
 ollama:
 
-- url: http://ollama-service.uaiso.svc.cluster.local:11434 (k8s internal)
+- url: http://ollama-service.ollama.svc.cluster.local:11434 (k8s internal)
 - http ingress: http://ollama.uaiso.lan
 - no apikey
 ---
@@ -23,7 +23,7 @@ Create account, follow the instructions.
 Enter pod and login:
 
 ```bash
-kubectl -n uaiso exec -it ollama-0 -- bash 
+kubectl -n ollama exec -it ollama-0 -- bash 
 ```
 
 Call login command:
@@ -65,5 +65,5 @@ https://uaiso-serious.github.io/ollama-helper/
 Example: pull the llama3.2 3b model:
 
 ```bash
-kubectl -n uaiso exec ollama-0 -- bash -c "ollama pull llama3.2:3b"
+kubectl -n ollama exec ollama-0 -- bash -c "ollama pull llama3.2:3b"
 ```

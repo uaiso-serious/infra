@@ -1,0 +1,163 @@
+apiVersion: v1
+kind: Namespace
+metadata:
+  name: openfire
+---
+apiVersion: v1
+kind: Service
+metadata:
+  labels:
+    app: openfire
+  name: xmpp-lb
+  namespace: openfire
+spec:
+  ports:
+    - name: xmpp
+      port: 5222
+      protocol: TCP
+      targetPort: 5222
+  selector:
+    app: openfire
+  sessionAffinity: None
+  type: LoadBalancer
+---
+apiVersion: v1
+kind: Service
+metadata:
+  labels:
+    app: openfire
+  name: openfire-service
+  namespace: openfire
+spec:
+  ports:
+    - name: admin-console
+      port: 9090
+      protocol: TCP
+      targetPort: 9090
+    - name: inverse
+      port: 7070
+      protocol: TCP
+      targetPort: 7070
+  selector:
+    app: openfire
+  sessionAffinity: None
+  type: ClusterIP
+---
+apiVersion: v1
+kind: PersistentVolumeClaim
+metadata:
+  name: openfire-data
+  namespace: openfire
+spec:
+  accessModes:
+    - ReadWriteOnce
+  resources:
+    requests:
+      storage: 1Gi
+---
+apiVersion: apps/v1
+kind: StatefulSet
+metadata:
+  labels:
+    app: openfire
+  name: openfire
+  namespace: openfire
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: openfire
+  template:
+    metadata:
+      labels:
+        app: openfire
+    spec:
+      containers:
+        - image: ghcr.io/uaiso-serious/openfire:5.0.3v1
+          readinessProbe:
+            exec:
+              command:
+                - /opt/readiness.sh
+            initialDelaySeconds: 20
+            periodSeconds: 10
+            timeoutSeconds: 20
+            failureThreshold: 3
+          env:
+            - name: FQDN
+              value: xmpp.uaiso.lan
+            - name: DOMAIN
+              value: xmpp.uaiso.lan
+            - name: REST_API_SECRET
+              value: secretkey123
+          imagePullPolicy: Always
+          name: openfire
+          ports:
+            - containerPort: 9090
+              protocol: TCP
+            - containerPort: 5222
+              protocol: TCP
+            - containerPort: 7070
+              protocol: TCP
+          volumeMounts:
+            - name: openfire-data
+              mountPath: /data
+      volumes:
+        - name: openfire-data
+          persistentVolumeClaim:
+            claimName: openfire-data
+      dnsPolicy: ClusterFirst
+      restartPolicy: Always
+---
+apiVersion: networking.k8s.io/v1
+kind: Ingress
+metadata:
+  name: openfire
+  namespace: openfire
+  annotations:
+    traefik.ingress.kubernetes.io/router.entrypoints: web
+spec:
+  rules:
+    - host: xmpp-adm.uaiso.lan
+      http:
+        paths:
+          - path: /
+            pathType: Prefix
+            backend:
+              service:
+                name: openfire-service
+                port:
+                  number: 9090
+---
+apiVersion: traefik.io/v1alpha1
+kind: Middleware
+metadata:
+  name: xmppweb-redirect
+  namespace: openfire
+spec:
+  redirectRegex:
+    regex: ^(https?://)xmpp\.uaiso\.lan/?$
+    replacement: ${1}xmpp.uaiso.lan/xmppweb/
+    permanent: true
+---
+apiVersion: networking.k8s.io/v1
+kind: Ingress
+metadata:
+  name: xmpp
+  namespace: openfire
+  annotations:
+    traefik.ingress.kubernetes.io/router.entrypoints: web
+    traefik.ingress.kubernetes.io/router.middlewares: openfire-xmppweb-redirect@kubernetescrd
+    traefik.ingress.kubernetes.io/router.priority: "100"
+spec:
+  rules:
+    - host: xmpp.uaiso.lan
+      http:
+        paths:
+          - path: /
+            pathType: Prefix
+            backend:
+              service:
+                name: openfire-service
+                port:
+                  number: 7070
+---
