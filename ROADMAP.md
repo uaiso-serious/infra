@@ -24,3 +24,5 @@ ROADMAP:
 - privateGPT
 - librechat
 - comfyUI
+- https://owncloud.com/
+- https://github.com/workadventure/workadventure

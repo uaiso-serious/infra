@@ -1,7 +1,7 @@
 apiVersion: v1
 kind: Namespace
 metadata:
-  name: n8n
+  name: ollama
 ---
 apiVersion: v1
 kind: PersistentVolumeClaim
@@ -36,7 +36,7 @@ spec:
       runtimeClassName: nvidia
       containers:
         - name: ollama-container
-          image: ollama/ollama:0.13.2
+          image: ollama/ollama:0.14.2
           ports:
             - containerPort: 11434
               name: http
