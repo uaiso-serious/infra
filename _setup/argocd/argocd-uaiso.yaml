@@ -142,7 +142,7 @@ spec:
   source:
     chart: kubeshark
     repoURL: https://helm.kubehq.com
-    targetRevision: 52.11.0
+    targetRevision: 52.11.7
     helm:
       releaseName: kubeshark
       valuesObject:
