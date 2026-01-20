@@ -26,3 +26,4 @@ ROADMAP:
 - comfyUI
 - https://owncloud.com/
 - https://github.com/workadventure/workadventure
+- https://github.com/coder/code-server

@@ -1,0 +1,206 @@
+apiVersion: argoproj.io/v1alpha1
+kind: Application
+metadata:
+  name: ollama-cuda
+spec:
+  destination:
+    namespace: ollama-cuda
+    server: https://kubernetes.default.svc
+  project: uaiso
+  source:
+    path: apps/ollama-cuda
+    repoURL: http://admin:admin@onedev.uaiso.lan/uaiso.git
+    targetRevision: HEAD
+status: {}
+---
+apiVersion: argoproj.io/v1alpha1
+kind: Application
+metadata:
+  name: ollama-cpu
+spec:
+  destination:
+    namespace: ollama-cpu
+    server: https://kubernetes.default.svc
+  project: uaiso
+  source:
+    path: apps/ollama-cpu
+    repoURL: http://admin:admin@onedev.uaiso.lan/uaiso.git
+    targetRevision: HEAD
+status: {}
+---
+apiVersion: argoproj.io/v1alpha1
+kind: Application
+metadata:
+  name: open-webui
+spec:
+  destination:
+    namespace: open-webui
+    server: https://kubernetes.default.svc
+  project: uaiso
+  source:
+    path: apps/open-webui
+    repoURL: http://admin:admin@onedev.uaiso.lan/uaiso.git
+    targetRevision: HEAD
+status: {}
+---
+apiVersion: argoproj.io/v1alpha1
+kind: Application
+metadata:
+  name: keycloak
+spec:
+  destination:
+    namespace: keycloak
+    server: https://kubernetes.default.svc
+  project: uaiso
+  source:
+    path: apps/keycloak
+    repoURL: http://admin:admin@onedev.uaiso.lan/uaiso.git
+    targetRevision: HEAD
+status: {}
+---
+apiVersion: argoproj.io/v1alpha1
+kind: Application
+metadata:
+  name: anythingllm
+spec:
+  destination:
+    namespace: anythingllm
+    server: https://kubernetes.default.svc
+  project: uaiso
+  source:
+    path: apps/anythingllm
+    repoURL: http://admin:admin@onedev.uaiso.lan/uaiso.git
+    targetRevision: HEAD
+status: {}
+---
+apiVersion: argoproj.io/v1alpha1
+kind: Application
+metadata:
+  name: mcp-inspector
+spec:
+  destination:
+    namespace: mcp-inspector
+    server: https://kubernetes.default.svc
+  project: uaiso
+  source:
+    path: apps/mcp-inspector
+    repoURL: http://admin:admin@onedev.uaiso.lan/uaiso.git
+    targetRevision: HEAD
+status: {}
+---
+apiVersion: argoproj.io/v1alpha1
+kind: Application
+metadata:
+  name: n8n
+spec:
+  destination:
+    namespace: n8n
+    server: https://kubernetes.default.svc
+  project: uaiso
+  source:
+    path: apps/n8n
+    repoURL: http://admin:admin@onedev.uaiso.lan/uaiso.git
+    targetRevision: HEAD
+status: {}
+---
+apiVersion: argoproj.io/v1alpha1
+kind: Application
+metadata:
+  name: openfire
+spec:
+  destination:
+    namespace: openfire
+    server: https://kubernetes.default.svc
+  project: uaiso
+  source:
+    path: apps/openfire
+    repoURL: http://admin:admin@onedev.uaiso.lan/uaiso.git
+    targetRevision: HEAD
+status: {}
+---
+apiVersion: argoproj.io/v1alpha1
+kind: Application
+metadata:
+  name: rabbitmq
+spec:
+  destination:
+    namespace: rabbitmq
+    server: https://kubernetes.default.svc
+  project: uaiso
+  source:
+    path: apps/rabbitmq
+    repoURL: http://admin:admin@onedev.uaiso.lan/uaiso.git
+    targetRevision: HEAD
+status: {}
+---
+apiVersion: argoproj.io/v1alpha1
+kind: Application
+metadata:
+  name: kubeshark
+spec:
+  project: uaiso
+  source:
+    chart: kubeshark
+    repoURL: https://helm.kubehq.com
+    targetRevision: 52.11.0
+    helm:
+      releaseName: kubeshark
+      valuesObject:
+        tap:
+          ingress:
+            enabled: true
+            className: "traefik"
+            host: ks.uaiso.lan
+  syncPolicy:
+    syncOptions:
+      - CreateNamespace=true
+  destination:
+    server: "https://kubernetes.default.svc"
+    namespace: kubeshark
+status: {}
+---
+apiVersion: argoproj.io/v1alpha1
+kind: Application
+metadata:
+  name: grafana
+spec:
+  destination:
+    namespace: grafana
+    server: https://kubernetes.default.svc
+  project: uaiso
+  source:
+    path: apps/grafana
+    repoURL: http://admin:admin@onedev.uaiso.lan/uaiso.git
+    targetRevision: HEAD
+status: {}
+---
+apiVersion: argoproj.io/v1alpha1
+kind: Application
+metadata:
+  name: postgresql
+spec:
+  destination:
+    namespace: postgresql
+    server: https://kubernetes.default.svc
+  project: uaiso
+  source:
+    path: apps/postgresql
+    repoURL: http://admin:admin@onedev.uaiso.lan/uaiso.git
+    targetRevision: HEAD
+status: {}
+---
+apiVersion: argoproj.io/v1alpha1
+kind: Application
+metadata:
+  name: zabbix
+spec:
+  destination:
+    namespace: zabbix
+    server: https://kubernetes.default.svc
+  project: uaiso
+  source:
+    path: apps/zabbix
+    repoURL: http://admin:admin@onedev.uaiso.lan/uaiso.git
+    targetRevision: HEAD
+status: {}
+---

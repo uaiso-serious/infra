@@ -1,0 +1,9 @@
+{
+  "name" : "uaiso",
+  "codeManagement" : true,
+  "packManagement" : true,
+  "issueManagement" : true,
+  "timeTracking" : true,
+  "gitPackConfig" : {},
+  "codeAnalysisSetting" : {}
+}

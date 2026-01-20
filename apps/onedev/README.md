@@ -8,3 +8,7 @@ helm install onedev onedev/onedev -n onedev --create-namespace --values values.y
 ```
 
 http://onedev.uaiso.lan
+
+helm search repo onedev --versions
+
+14.0.7

@@ -11,12 +11,12 @@ metadata:
 data:
   .env: |
     LLM_PROVIDER='ollama'
-    OLLAMA_BASE_PATH='http://ollama-service.uaiso.svc.cluster.local:11434 '
+    OLLAMA_BASE_PATH='http://ollama-service.ollama-cuda.svc.cluster.local:11434'
     OLLAMA_MODEL_PREF='granite4:3b'
     OLLAMA_PERFORMANCE_MODE='base'
     OLLAMA_KEEP_ALIVE_TIMEOUT='300'
     EMBEDDING_ENGINE='ollama'
-    EMBEDDING_BASE_PATH='http://ollama-service.uaiso.svc.cluster.local:11434'
+    EMBEDDING_BASE_PATH='http://ollama-service.ollama-cuda.svc.cluster.local:11434'
     EMBEDDING_MODEL_MAX_CHUNK_LENGTH='8192'
     EMBEDDING_MODEL_PREF='embeddinggemma:latest'
     OLLAMA_EMBEDDING_BATCH_SIZE='1'

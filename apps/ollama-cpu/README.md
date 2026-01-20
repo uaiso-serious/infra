@@ -53,9 +53,9 @@ requirements:
 - Ollama gpu list: https://docs.ollama.com/gpu
 - [nvidia instructions](../_setup/baremetal/README.md)
 
-Deploy ollama with gpu support:
+Deploy ollama with cuda support:
 ```bash
-kubectl apply -f ollama-with-gpu.yaml
+kubectl apply -f ollama-cuda.yaml
 ```
 
 Choose your model by size to fit your gpu vram:

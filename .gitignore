@@ -1,5 +1,5 @@
 .idea/
 temp.yaml
 .debug
-postgresql/backup
+apps/postgresql/backup
 .venv

@@ -9,3 +9,6 @@ helm install kubeshark kubeshark/kubeshark -n kubeshark --create-namespace --val
 ```
 
 http://ks.uaiso.lan
+
+helm search repo kubeshark --versions
+
