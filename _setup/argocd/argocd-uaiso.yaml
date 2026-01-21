@@ -221,3 +221,31 @@ spec:
     repoURL: http://admin:admin@onedev.uaiso.lan/uaiso.git
     targetRevision: HEAD
 status: {}
+---
+apiVersion: argoproj.io/v1alpha1
+kind: Application
+metadata:
+  name: code
+spec:
+  project: uaiso
+  source:
+    repoURL: https://github.com/coder/code-server
+    targetRevision: v4.3.0
+    path: ci/helm-chart
+    helm:
+      valuesObject:
+        ingress:
+          enabled: true
+          hosts:
+            - host: code.uaiso.lan
+              paths:
+                - /
+          ingressClassName: "traefik"
+  syncPolicy:
+    syncOptions:
+      - CreateNamespace=true
+  destination:
+    server: "https://kubernetes.default.svc"
+    namespace: code
+status: {}
+---
