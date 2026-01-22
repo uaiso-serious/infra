@@ -1,0 +1,46 @@
+config:
+  spec:
+    destination:
+      server: https://kubernetes.default.svc
+    source:
+      repoURL: https://github.com/uaiso-serious/infra.git
+      targetRevision: main
+applications:
+  - name: anythingllm
+  - name: code
+    sources:
+      - repoURL: 'https://github.com/coder/code-server.git'
+        targetRevision: v4.108.0
+        path: ci/helm-chart
+        helm:
+          valueFiles:
+            - $values/apps/code/values.yaml
+      - repoURL: 'https://github.com/uaiso-serious/infra.git'
+        targetRevision: main
+        ref: values
+  - name: grafana
+  - name: keycloak
+  - name: kubeshark
+    sources:
+      - repoURL: 'https://github.com/kubeshark/kubeshark.git'
+        targetRevision: v52.11.7
+        path: helm-chart
+        helm:
+          valueFiles:
+            - $values/apps/kubeshark/values.yaml
+      - repoURL: 'https://github.com/uaiso-serious/infra.git'
+        targetRevision: main
+        ref: values
+    path: helm-chart
+  - name: mcp-inspector
+  - name: n8n
+  - name: ollama-cpu
+  - name: ollama-cuda
+  - name: onedev
+  - name: open-webui
+  - name: openfire
+  - name: postgresql
+  - name: rabbitmq
+  - name: squid
+  - name: ssh-socks5
+  - name: zabbix

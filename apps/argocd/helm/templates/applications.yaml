@@ -1,0 +1,46 @@
+{{- range .Values.applications }}
+{{- $config := $.Values.config -}}
+{{- $appName := .name }}
+apiVersion: argoproj.io/v1alpha1
+kind: Application
+metadata:
+  name: {{ printf "uaiso-%s" $appName | quote }}
+  namespace: argocd
+  finalizers:
+  - resources-finalizer.argocd.argoproj.io
+spec:
+  destination:
+    namespace: {{ .namespace | default $appName | quote }}
+    server: {{ $config.spec.destination.server | quote }}
+  project: default
+  sources:
+  {{- if .sources}}
+  {{- range .sources}}
+    - repoURL: {{ .repoURL | default $config.spec.source.repoURL }}
+      targetRevision: {{ .targetRevision | default $config.spec.source.targetRevision }}
+      {{- if .path }}
+      path: {{ .path | quote }}
+      {{- else }}
+      path: {{ printf "apps/%s" $appName | quote }}
+      {{- end }}
+      {{- with .helm }}
+      helm:
+        {{- . | toYaml | nindent 8 }}
+      {{- end }}
+      {{- if .ref }}
+      ref: {{ .ref }}
+      {{- end }}
+  {{- end }}
+  {{- else }}
+    - repoURL: {{ $config.spec.source.repoURL }}
+      targetRevision: {{ $config.spec.source.targetRevision }}
+      path: {{ printf "apps/%s" $appName | quote }}
+  {{- end }}
+  syncPolicy:
+    syncOptions:
+      - CreateNamespace=true
+    automated:
+      prune: true
+      selfHeal: true
+---
+{{ end -}}
