@@ -28,17 +28,3 @@ Easy to deploy, low hardware requirements, with tools to debug.
 If you want to expose this setup to the internet, **don't forget to enable tls, and change the default passwords**.
 
 Or just use ssh tunnels/vpn to access it remotely in a secure way.
-
-Check [k3s readme](_setup/k3s/README.md) for more detailed DNS configuration instructions for DNS ninjas.
-
----
-
-# My personal home lab bare metal specs:
-
-- Intel(R) Core(TM) i7-3770 CPU @ 3.40GHz
-- 16 GB RAM DDR3 (Using about 3.2GB)
-- NVIDIA GeForce RTX 3050 8GB VRAM (Pcie 4.0 x16)
-- SSD 256GB
-- Pcie 2.0 x16
-- Ubuntu Server 24.04 LTS
-- k3s v1.33.6+k3s1 (b5847677)

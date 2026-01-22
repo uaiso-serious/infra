@@ -4,6 +4,7 @@ repo_name: uaiso-serious/infra
 repo_url: https://github.com/uaiso-serious/infra
 nav:
   - Home: index.md
+  - DNS: dns.md
   - Examples:
       - argocd: examples/argocd/index.md
       - chatbot: examples/chatbot/index.md
@@ -24,6 +25,7 @@ nav:
       - apps/postgresql.md
       - apps/rabbitmq.md
       - apps/squid.md
+      - apps/ssh-socks5.md
       - apps/zabbix.md
   - Manifest: manifest.md
 theme:

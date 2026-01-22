@@ -1,4 +1,6 @@
-# SOCKS5 Proxy deployment with SSH Dynamic Port Forwarding
+# Ssh-socks5
+
+Why ssh-socks5? Not AI related, useful for tunneling for debug and dns workaround.
 
 Script changes the system's `/etc/hosts` file to add the necessary DNS entries for the services deployed in the K3s
 cluster.
