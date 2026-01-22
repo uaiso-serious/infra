@@ -14,5 +14,5 @@ kubectl -n argocd apply -f https://raw.githubusercontent.com/argoproj/argo-cd/re
 ```
 
 ```bash
-kubectl -n argocd apply argocd.yaml 
+kubectl -n argocd apply -f argocd.yaml 
 ```
