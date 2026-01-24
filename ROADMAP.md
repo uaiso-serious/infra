@@ -2,11 +2,11 @@
 ROADMAP:
 
 - chatwoot
-- migrate bare metal to run inside proxmox vm with pci-e passthrough of nvidia gpu.
-- supabase
 - flowise
 - dify
 - typebot
+- migrate bare metal to run inside proxmox vm with pci-e passthrough of nvidia gpu.
+- supabase
 - vllm
 - aws bedrock
 - jupiter notebook
@@ -16,7 +16,6 @@ ROADMAP:
 - playright test runner container
 - playright mcp server (allow LLM to execute the playright test runner)
 - https://www.talos.dev/ inside proxmox
-- nip.io for dynamic dns
 - whisper whisperx
 - stable diffusion webui
 - privateGPT
