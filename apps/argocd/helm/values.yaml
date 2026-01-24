@@ -18,6 +18,7 @@ applications:
       - repoURL: 'https://github.com/uaiso-serious/infra.git'
         targetRevision: main
         ref: values
+  - name: evolution-api
   - name: grafana
   - name: keycloak
   - name: kubeshark

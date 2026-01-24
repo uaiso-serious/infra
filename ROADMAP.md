@@ -1,7 +1,6 @@
 
 ROADMAP:
 
-- evolution api
 - chatwoot
 - migrate bare metal to run inside proxmox vm with pci-e passthrough of nvidia gpu.
 - supabase

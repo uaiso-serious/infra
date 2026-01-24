@@ -1,0 +1,80 @@
+apiVersion: v1
+kind: Namespace
+metadata:
+  name: evolution-api
+---
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  labels:
+    app: evolution-api
+  name: evolution-api
+  namespace: evolution-api
+spec:
+  selector:
+    matchLabels:
+      app: evolution-api
+  template:
+    metadata:
+      labels:
+        app: evolution-api
+    spec:
+      containers:
+        - name: evolution-api
+          image: atendai/evolution-api:v1.8.7
+          env:
+            - name: AUTHENTICATION_API_KEY
+              value: "changeme"
+          ports:
+            - containerPort: 8080
+              name: http-evolution
+              protocol: TCP
+          volumeMounts:
+            - name: store
+              mountPath: /evolution/store
+            - name: instances
+              mountPath: /evolution/instances
+      volumes:
+        - name: store
+          hostPath:
+            path: /mnt/data/evolution/store
+            type: DirectoryOrCreate
+        - name: instances
+          hostPath:
+            path: /mnt/data/evolution/instances
+            type: DirectoryOrCreate
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: evolution-api-service
+  namespace: evolution-api
+spec:
+  ports:
+    - port: 8080
+      protocol: TCP
+      targetPort: http-evolution
+  selector:
+    app: evolution-api
+  sessionAffinity: None
+  type: ClusterIP
+---
+apiVersion: networking.k8s.io/v1
+kind: Ingress
+metadata:
+  name: evolution-api
+  namespace: evolution-api
+  annotations:
+    traefik.ingress.kubernetes.io/router.entrypoints: web
+spec:
+  rules:
+    - host: evolution-api.uaiso.lan
+      http:
+        paths:
+          - path: /
+            pathType: Prefix
+            backend:
+              service:
+                name: evolution-api-service
+                port:
+                  number: 8080
