@@ -35,6 +35,7 @@ applications:
     path: helm-chart
   - name: mcp-inspector
   - name: n8n
+  - name: nextcloud
   - name: ollama-cpu
   - name: ollama-cuda
   - name: onedev

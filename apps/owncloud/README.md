@@ -1,6 +1,6 @@
 # Owncloud
 
-Why Owncloud? Not AI related, useful file hosting for RAG pipelines.
+Why Owncloud? Not AI related, useful file hosting for RAG pipelines and WebDav integrations.
 
 [https://github.com/owncloud/ocis](https://github.com/owncloud/ocis)
 
