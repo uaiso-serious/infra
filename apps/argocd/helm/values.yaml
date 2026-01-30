@@ -57,4 +57,15 @@ applications:
   - name: rabbitmq
   - name: squid
   - name: ssh-socks5
+  - name: supabase
+    sources:
+      - repoURL: 'https://github.com/supabase-community/supabase-kubernetes.git'
+        targetRevision: supabase-0.3.3
+        path: charts/supabase
+        helm:
+          valueFiles:
+            - $values/apps/supabase/values.yaml
+      - repoURL: 'https://github.com/uaiso-serious/infra.git'
+        targetRevision: main
+        ref: values
   - name: zabbix

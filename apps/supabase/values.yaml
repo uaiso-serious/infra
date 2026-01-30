@@ -1,0 +1,8 @@
+kong:
+  ingress:
+    className: "traefik"
+    hosts:
+      - host: supabase.uaiso.lan
+        paths:
+          - path: /
+            pathType: Prefix
