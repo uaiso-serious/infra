@@ -28,8 +28,7 @@ jobs:
       - name: Install dependencies
         run: |
           ./build-docs.sh
-          pip install mkdocs-material
-          pip install mkdocs_puml
+          pip install -r requirements.txt
 
       - name: Deploy to GitHub Pages
         run: mkdocs gh-deploy --force

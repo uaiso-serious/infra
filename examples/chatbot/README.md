@@ -23,7 +23,7 @@ run the following commands as root inside the machine or vm to deploy the workin
 ```bash
 git clone https://github.com/uaiso-serious/infra.git
 ./infra/_setup/k3s/k3s.sh
-./infra/_setup/chatbot/chatbot.sh
+./infra/examples/chatbot/chatbot.sh
 ```
 
 Takes about 10 minutes to download container images and LLM models depending on your internet speed. You can use 

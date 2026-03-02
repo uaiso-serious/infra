@@ -1,4 +1,4 @@
-# Ollama-cpu
+# Ollama cpu
 
 Why ollama? Easy to use Local LLMs.
 
@@ -54,21 +54,12 @@ available cloud models:
 
 https://ollama.com/search?c=cloud
 
----
-
-# If you have Nvidia GPU
-
-requirements:
-
-- Ollama gpu list: [https://docs.ollama.com/gpu](https://docs.ollama.com/gpu)
-- [nvidia instructions](../_setup/baremetal/README.md)
-
-Deploy ollama with cuda support:
+Deploy ollama without cuda support:
 ```bash
-kubectl apply -f ollama-cuda.yaml
+kubectl apply -f ollama-cpu.yaml
 ```
 
-Choose your model by size to fit your gpu vram:
+Choose your model by size to fit your ram:
 
 [https://uaiso-serious.github.io/ollama-helper/](https://uaiso-serious.github.io/ollama-helper/)
 

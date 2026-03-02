@@ -7,27 +7,34 @@ nav:
   - Quickstart: quickstart.md
   - DNS: dns.md
   - Examples:
-      - argocd: examples/argocd/index.md
-      - chatbot: examples/chatbot/index.md
-      - letsencrypt: examples/letsencrypt/index.md
+      - examples/argocd.md
+      - examples/chatbot.md
+      - examples/letsencrypt.md
   - Apps:
       - apps/anythingllm.md
       - apps/argocd.md
+      - apps/chatwoot.md
+      - apps/cloudflared.md
       - apps/code.md
+      - apps/evolution-api.md
       - apps/grafana.md
       - apps/keycloak.md
       - apps/kubeshark.md
       - apps/mcp-inspector.md
       - apps/n8n.md
+      - apps/nextcloud.md
       - apps/ollama-cpu.md
       - apps/ollama-cuda.md
       - apps/onedev.md
       - apps/openfire.md
       - apps/open-webui.md
+      - apps/owncloud.md
       - apps/postgresql.md
       - apps/rabbitmq.md
+      - apps/redis.md
       - apps/squid.md
       - apps/ssh-socks5.md
+      - apps/supabase.md
       - apps/zabbix.md
   - Manifest: manifest.md
 theme:
