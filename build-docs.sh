@@ -1,5 +1,5 @@
 #!/bin/bash
-mkdir -p ./docs/apps
+mkdir -p ./docs/apps ./docs/examples
 
 yq -i '(.nav[] | select(has("Apps")).Apps) = []' mkdocs.yml
 
