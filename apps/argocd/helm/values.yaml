@@ -18,6 +18,7 @@ applications:
       - repoURL: 'https://github.com/uaiso-serious/infra.git'
         targetRevision: main
         ref: values
+  - name: cloudflared
   - name: code
     sources:
       - repoURL: 'https://github.com/coder/code-server.git'
