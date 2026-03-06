@@ -1,0 +1,1765 @@
+
+<!doctype html>
+<html lang="en" class="no-js">
+  <head>
+    
+      <meta charset="utf-8">
+      <meta name="viewport" content="width=device-width,initial-scale=1">
+      
+      
+      
+        <link rel="canonical" href="https://uaiso-serious.github.io/infra/examples/chatbot/">
+      
+      
+        <link rel="prev" href="../argocd/">
+      
+      
+        <link rel="next" href="../letsencrypt/">
+      
+      
+        
+      
+      
+      <link rel="icon" href="../../assets/images/favicon.png">
+      <meta name="generator" content="mkdocs-1.6.1, mkdocs-material-9.7.3">
+    
+    
+      
+        <title>Chatbot - UaiSo Serious</title>
+      
+    
+    
+      <link rel="stylesheet" href="../../assets/stylesheets/main.484c7ddc.min.css">
+      
+        
+        <link rel="stylesheet" href="../../assets/stylesheets/palette.ab4e12ef.min.css">
+      
+      
+
+
+    
+    
+      
+    
+    
+      
+        
+        
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+        <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto:300,300i,400,400i,700,700i%7CRoboto+Mono:400,400i,700,700i&display=fallback">
+        <style>:root{--md-text-font:"Roboto";--md-code-font:"Roboto Mono"}</style>
+      
+    
+    
+      <link rel="stylesheet" href="../../assets/mkdocs_puml/puml.css">
+    
+      <link rel="stylesheet" href="../../assets/mkdocs_puml/interaction.css">
+    
+    <script>__md_scope=new URL("../..",location),__md_hash=e=>[...e].reduce(((e,_)=>(e<<5)-e+_.charCodeAt(0)),0),__md_get=(e,_=localStorage,t=__md_scope)=>JSON.parse(_.getItem(t.pathname+"."+e)),__md_set=(e,_,t=localStorage,a=__md_scope)=>{try{t.setItem(a.pathname+"."+e,JSON.stringify(_))}catch(e){}}</script>
+    
+      
+
+    
+    
+  </head>
+  
+  
+    
+    
+      
+    
+    
+    
+    
+    <body dir="ltr" data-md-color-scheme="default" data-md-color-primary="indigo" data-md-color-accent="indigo">
+  
+    
+    <input class="md-toggle" data-md-toggle="drawer" type="checkbox" id="__drawer" autocomplete="off">
+    <input class="md-toggle" data-md-toggle="search" type="checkbox" id="__search" autocomplete="off">
+    <label class="md-overlay" for="__drawer"></label>
+    <div data-md-component="skip">
+      
+        
+        <a href="#chatbot" class="md-skip">
+          Skip to content
+        </a>
+      
+    </div>
+    <div data-md-component="announce">
+      
+    </div>
+    
+    
+      
+
+  
+
+<header class="md-header md-header--shadow" data-md-component="header">
+  <nav class="md-header__inner md-grid" aria-label="Header">
+    <a href="../.." title="UaiSo Serious" class="md-header__button md-logo" aria-label="UaiSo Serious" data-md-component="logo">
+      
+  
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 8a3 3 0 0 0 3-3 3 3 0 0 0-3-3 3 3 0 0 0-3 3 3 3 0 0 0 3 3m0 3.54C9.64 9.35 6.5 8 3 8v11c3.5 0 6.64 1.35 9 3.54 2.36-2.19 5.5-3.54 9-3.54V8c-3.5 0-6.64 1.35-9 3.54"/></svg>
+
+    </a>
+    <label class="md-header__button md-icon" for="__drawer">
+      
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M3 6h18v2H3zm0 5h18v2H3zm0 5h18v2H3z"/></svg>
+    </label>
+    <div class="md-header__title" data-md-component="header-title">
+      <div class="md-header__ellipsis">
+        <div class="md-header__topic">
+          <span class="md-ellipsis">
+            UaiSo Serious
+          </span>
+        </div>
+        <div class="md-header__topic" data-md-component="header-topic">
+          <span class="md-ellipsis">
+            
+              Chatbot
+            
+          </span>
+        </div>
+      </div>
+    </div>
+    
+      
+        <form class="md-header__option" data-md-component="palette">
+  
+    
+    
+    
+    <input class="md-option" data-md-color-media="(prefers-color-scheme: dark)" data-md-color-scheme="default" data-md-color-primary="indigo" data-md-color-accent="indigo"  aria-label="Switch to dark mode"  type="radio" name="__palette" id="__palette_0">
+    
+      <label class="md-header__button md-icon" title="Switch to dark mode" for="__palette_1" hidden>
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M17 7H7a5 5 0 0 0-5 5 5 5 0 0 0 5 5h10a5 5 0 0 0 5-5 5 5 0 0 0-5-5M7 15a3 3 0 0 1-3-3 3 3 0 0 1 3-3 3 3 0 0 1 3 3 3 3 0 0 1-3 3"/></svg>
+      </label>
+    
+  
+    
+    
+    
+    <input class="md-option" data-md-color-media="(prefers-color-scheme: light)" data-md-color-scheme="slate" data-md-color-primary="black" data-md-color-accent="indigo"  aria-label="Switch to light mode"  type="radio" name="__palette" id="__palette_1">
+    
+      <label class="md-header__button md-icon" title="Switch to light mode" for="__palette_0" hidden>
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M17 7H7a5 5 0 0 0-5 5 5 5 0 0 0 5 5h10a5 5 0 0 0 5-5 5 5 0 0 0-5-5m0 8a3 3 0 0 1-3-3 3 3 0 0 1 3-3 3 3 0 0 1 3 3 3 3 0 0 1-3 3"/></svg>
+      </label>
+    
+  
+</form>
+      
+    
+    
+      <script>var palette=__md_get("__palette");if(palette&&palette.color){if("(prefers-color-scheme)"===palette.color.media){var media=matchMedia("(prefers-color-scheme: light)"),input=document.querySelector(media.matches?"[data-md-color-media='(prefers-color-scheme: light)']":"[data-md-color-media='(prefers-color-scheme: dark)']");palette.color.media=input.getAttribute("data-md-color-media"),palette.color.scheme=input.getAttribute("data-md-color-scheme"),palette.color.primary=input.getAttribute("data-md-color-primary"),palette.color.accent=input.getAttribute("data-md-color-accent")}for(var[key,value]of Object.entries(palette.color))document.body.setAttribute("data-md-color-"+key,value)}</script>
+    
+    
+    
+    
+      <div class="md-header__source">
+        <a href="https://github.com/uaiso-serious/infra" title="Go to repository" class="md-source" data-md-component="source">
+  <div class="md-source__icon md-icon">
+    
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512"><!--! Font Awesome Free 7.1.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2025 Fonticons, Inc.--><path d="M439.6 236.1 244 40.5c-5.4-5.5-12.8-8.5-20.4-8.5s-15 3-20.4 8.4L162.5 81l51.5 51.5c27.1-9.1 52.7 16.8 43.4 43.7l49.7 49.7c34.2-11.8 61.2 31 35.5 56.7-26.5 26.5-70.2-2.9-56-37.3L240.3 199v121.9c25.3 12.5 22.3 41.8 9.1 55-6.4 6.4-15.2 10.1-24.3 10.1s-17.8-3.6-24.3-10.1c-17.6-17.6-11.1-46.9 11.2-56v-123c-20.8-8.5-24.6-30.7-18.6-45L142.6 101 8.5 235.1C3 240.6 0 247.9 0 255.5s3 15 8.5 20.4l195.6 195.7c5.4 5.4 12.7 8.4 20.4 8.4s15-3 20.4-8.4l194.7-194.7c5.4-5.4 8.4-12.8 8.4-20.4s-3-15-8.4-20.4"/></svg>
+  </div>
+  <div class="md-source__repository">
+    uaiso-serious/infra
+  </div>
+</a>
+      </div>
+    
+  </nav>
+  
+</header>
+    
+    <div class="md-container" data-md-component="container">
+      
+      
+        
+          
+        
+      
+      <main class="md-main" data-md-component="main">
+        <div class="md-main__inner md-grid">
+          
+            
+              
+              <div class="md-sidebar md-sidebar--primary" data-md-component="sidebar" data-md-type="navigation" >
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+
+
+
+<nav class="md-nav md-nav--primary" aria-label="Navigation" data-md-level="0">
+  <label class="md-nav__title" for="__drawer">
+    <a href="../.." title="UaiSo Serious" class="md-nav__button md-logo" aria-label="UaiSo Serious" data-md-component="logo">
+      
+  
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 8a3 3 0 0 0 3-3 3 3 0 0 0-3-3 3 3 0 0 0-3 3 3 3 0 0 0 3 3m0 3.54C9.64 9.35 6.5 8 3 8v11c3.5 0 6.64 1.35 9 3.54 2.36-2.19 5.5-3.54 9-3.54V8c-3.5 0-6.64 1.35-9 3.54"/></svg>
+
+    </a>
+    UaiSo Serious
+  </label>
+  
+    <div class="md-nav__source">
+      <a href="https://github.com/uaiso-serious/infra" title="Go to repository" class="md-source" data-md-component="source">
+  <div class="md-source__icon md-icon">
+    
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512"><!--! Font Awesome Free 7.1.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2025 Fonticons, Inc.--><path d="M439.6 236.1 244 40.5c-5.4-5.5-12.8-8.5-20.4-8.5s-15 3-20.4 8.4L162.5 81l51.5 51.5c27.1-9.1 52.7 16.8 43.4 43.7l49.7 49.7c34.2-11.8 61.2 31 35.5 56.7-26.5 26.5-70.2-2.9-56-37.3L240.3 199v121.9c25.3 12.5 22.3 41.8 9.1 55-6.4 6.4-15.2 10.1-24.3 10.1s-17.8-3.6-24.3-10.1c-17.6-17.6-11.1-46.9 11.2-56v-123c-20.8-8.5-24.6-30.7-18.6-45L142.6 101 8.5 235.1C3 240.6 0 247.9 0 255.5s3 15 8.5 20.4l195.6 195.7c5.4 5.4 12.7 8.4 20.4 8.4s15-3 20.4-8.4l194.7-194.7c5.4-5.4 8.4-12.8 8.4-20.4s-3-15-8.4-20.4"/></svg>
+  </div>
+  <div class="md-source__repository">
+    uaiso-serious/infra
+  </div>
+</a>
+    </div>
+  
+  <ul class="md-nav__list" data-md-scrollfix>
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../.." class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Home
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../quickstart/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Quickstart
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../dns/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    DNS
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+    
+  
+  
+  
+    
+    
+    
+    
+    
+    <li class="md-nav__item md-nav__item--active md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_4" checked>
+        
+          
+          <label class="md-nav__link" for="__nav_4" id="__nav_4_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Examples
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_4_label" aria-expanded="true">
+          <label class="md-nav__title" for="__nav_4">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    Examples
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../argocd/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Argo CD
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+    
+  
+  
+  
+    <li class="md-nav__item md-nav__item--active">
+      
+      <input class="md-nav__toggle md-toggle" type="checkbox" id="__toc">
+      
+      
+        
+      
+      
+        <label class="md-nav__link md-nav__link--active" for="__toc">
+          
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Chatbot
+  
+
+    
+  </span>
+  
+  
+
+          <span class="md-nav__icon md-icon"></span>
+        </label>
+      
+      <a href="./" class="md-nav__link md-nav__link--active">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Chatbot
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+      
+        
+
+<nav class="md-nav md-nav--secondary" aria-label="Table of contents">
+  
+  
+  
+    
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      Table of contents
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#requirements" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Requirements
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#quick-start" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Quick start
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#integration" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Integration
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Integration">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#why-jabberxmpp" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Why jabber/xmpp?
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#kubernetes-namespace" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Kubernetes namespace
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Kubernetes namespace">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#ollama" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Ollama
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#openfire" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Openfire
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#rabbitmq" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        RabbitMQ
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#n8n" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        n8n
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+    </ul>
+  
+</nav>
+      
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../letsencrypt/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Let's encrypt
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    
+    
+    
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_5" >
+        
+          
+          <label class="md-nav__link" for="__nav_5" id="__nav_5_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Apps
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_5_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_5">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    Apps
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../apps/anythingllm/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Anythingllm
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../apps/argocd/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    ArgoCD
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../apps/chatwoot/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Chatwoot
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../apps/cloudflared/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Cloudflared
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../apps/code/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Code
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../apps/erpnext/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    ERPnext
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../apps/evolution-api/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Evolution API
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../apps/grafana/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Grafana
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../apps/keycloak/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Keycloak
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../apps/kubeshark/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Kubeshark
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../apps/mcp-inspector/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Mcp-inspector
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../apps/n8n/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    N8n
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../apps/nextcloud/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Nextcloud
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../apps/nginx-proxy-manager/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Nginx proxy manager
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../apps/ollama-cpu/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Ollama cpu
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../apps/ollama-cuda/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Ollama Cuda
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../apps/onedev/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Onedev
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../apps/open-webui/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Open-webui
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../apps/openfire/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Openfire
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../apps/owncloud/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Owncloud
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../apps/postgresql/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Postgresql
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../apps/rabbitmq/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Rabbitmq
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../apps/redis/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Redis
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../apps/squid/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Squid
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../apps/ssh-socks5/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Ssh-socks5
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../apps/supabase/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Supabase
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../apps/zabbix/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Zabbix
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../manifest/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Manifest
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+    
+  </ul>
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+            
+              
+              <div class="md-sidebar md-sidebar--secondary" data-md-component="sidebar" data-md-type="toc" >
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+
+<nav class="md-nav md-nav--secondary" aria-label="Table of contents">
+  
+  
+  
+    
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      Table of contents
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#requirements" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Requirements
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#quick-start" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Quick start
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#integration" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Integration
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Integration">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#why-jabberxmpp" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Why jabber/xmpp?
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#kubernetes-namespace" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Kubernetes namespace
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Kubernetes namespace">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#ollama" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Ollama
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#openfire" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Openfire
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#rabbitmq" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        RabbitMQ
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#n8n" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        n8n
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+    </ul>
+  
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+          
+          
+            <div class="md-content" data-md-component="content">
+              
+              <article class="md-content__inner md-typeset">
+                
+                  
+
+
+  
+  
+
+
+<h1 id="chatbot">Chatbot</h1>
+<p>This document describes a simple example of integrating an XMPP server (Openfire), a workflow automation 
+tool (n8n), and a local large language model (LLM) using Ollama, all deployed on a lightweight Kubernetes distribution 
+(k3s).</p>
+<h2 id="requirements">Requirements</h2>
+<p>Hardware/network/so requirements</p>
+<ul>
+<li>Minimum 4GB RAM</li>
+<li>Minimum 2 CPU cores</li>
+<li>Minimum 20GB disk (ubuntu + k3s + container images + LLM model)</li>
+<li>Internet access to download container images and LLM model</li>
+<li>Ubuntu 24.04 LTS</li>
+</ul>
+<h2 id="quick-start">Quick start</h2>
+<p>Script automation instructions (vm or baremetal)</p>
+<p>run the following commands as root inside the machine or vm to deploy the working setup:</p>
+<pre><code class="language-bash">git clone https://github.com/uaiso-serious/infra.git
+./infra/_setup/k3s/k3s.sh
+./infra/examples/chatbot/chatbot.sh
+</code></pre>
+<p>Takes about 10 minutes to download container images and LLM models depending on your internet speed. You can use 
+kubectl or k9s command to check the pod status.</p>
+<p>Configure your browser to use a http proxy to access the ingress routes, point it to &lt;your-k3s-ipv4&gt; port 3128.</p>
+<p>Easy proxy stuff with <a href="https://chromewebstore.google.com/search/foxyproxy">FoxyProxy for Chrome</a>
+or <a href="https://addons.mozilla.org/en-US/firefox/addon/foxyproxy-standard/">FoxyProxy for Firefox</a></p>
+<p>Open <a href="http://xmpp.uaiso.lan/">http://xmpp.uaiso.lan/</a> login as admin/admin</p>
+<p>Say hi to severino bot.</p>
+<p>Congratulations, you have an AI chatbot.</p>
+<hr />
+<h2 id="integration">Integration</h2>
+<p>The architecture looks like this:</p>
+<p>XMPP Client &lt;-&gt; Openfire &lt;-&gt; n8n &lt;-&gt; Ollama LLM Integration</p>
+<div class='puml-container'><div class="puml light" style=""><svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" contentStyleType="text/css" data-diagram-type="SEQUENCE" height="395px" preserveAspectRatio="xMidYMid meet" style="width:576px;height:395px;background:#FFFFFF;" version="1.1" viewBox="0 0 576 395" width="576px" zoomAndPan="magnify" class="diagram"><defs/><g><g class="title" data-source-line="2"><text fill="#000000" font-family="sans-serif" font-size="14" font-weight="bold" lengthAdjust="spacing" textLength="496.8701" x="36.1338" y="27.9951">XMPP Client &lt;-&gt; Openfire &lt;-&gt; n8n &lt;-&gt; Ollama LLM Integration</text></g><g class="participant-lifeline" data-entity-uid="part1" data-qualified-name="User" id="part1-lifeline"><g><title>User .XMPP Client.</title><rect fill="#000000" fill-opacity="0.00000" height="194.7969" width="8" x="69.4097" y="118.5938"/><line style="stroke:#181818;stroke-width:0.5;stroke-dasharray:5,5;" x1="73" x2="73" y1="118.5938" y2="313.3906"/></g></g><g class="participant-lifeline" data-entity-uid="part2" data-qualified-name="Openfire" id="part2-lifeline"><g><title>Openfire</title><rect fill="#000000" fill-opacity="0.00000" height="194.7969" width="8" x="210.835" y="118.5938"/><line style="stroke:#181818;stroke-width:0.5;stroke-dasharray:5,5;" x1="214.5449" x2="214.5449" y1="118.5938" y2="313.3906"/></g></g><g class="participant-lifeline" data-entity-uid="part3" data-qualified-name="n8n" id="part3-lifeline"><g><title>n8n</title><rect fill="#000000" fill-opacity="0.00000" height="194.7969" width="8" x="358.043" y="118.5938"/><line style="stroke:#181818;stroke-width:0.5;stroke-dasharray:5,5;" x1="361.7163" x2="361.7163" y1="118.5938" y2="313.3906"/></g></g><g class="participant-lifeline" data-entity-uid="part4" data-qualified-name="Ollama" id="part4-lifeline"><g><title>Ollama</title><rect fill="#000000" fill-opacity="0.00000" height="194.7969" width="8" x="529.3403" y="118.5938"/><line style="stroke:#181818;stroke-width:0.5;stroke-dasharray:5,5;" x1="532.543" x2="532.543" y1="118.5938" y2="313.3906"/></g></g><g class="participant participant-head" data-entity-uid="part1" data-qualified-name="User" id="part1-head"><text fill="#000000" font-family="sans-serif" font-size="14" lengthAdjust="spacing" textLength="130.8193" x="5" y="115.292">User (XMPP Client)</text><ellipse cx="73.4097" cy="50.7969" fill="#E2E2F0" rx="8" ry="8" style="stroke:#181818;stroke-width:0.5;"/><path d="M73.4097,58.7969 L73.4097,85.7969 M60.4097,66.7969 L86.4097,66.7969 M73.4097,85.7969 L60.4097,100.7969 M73.4097,85.7969 L86.4097,100.7969" fill="none" style="stroke:#181818;stroke-width:0.5;"/></g><g class="participant participant-tail" data-entity-uid="part1" data-qualified-name="User" id="part1-tail"><text fill="#000000" font-family="sans-serif" font-size="14" lengthAdjust="spacing" textLength="130.8193" x="5" y="325.3857">User (XMPP Client)</text><ellipse cx="73.4097" cy="337.1875" fill="#E2E2F0" rx="8" ry="8" style="stroke:#181818;stroke-width:0.5;"/><path d="M73.4097,345.1875 L73.4097,372.1875 M60.4097,353.1875 L86.4097,353.1875 M73.4097,372.1875 L60.4097,387.1875 M73.4097,372.1875 L86.4097,387.1875" fill="none" style="stroke:#181818;stroke-width:0.5;"/></g><g class="participant participant-head" data-entity-uid="part2" data-qualified-name="Openfire" id="part2-head"><rect fill="#E2E2F0" height="30.2969" rx="2.5" ry="2.5" style="stroke:#181818;stroke-width:0.5;" width="74.5801" x="177.5449" y="87.2969"/><text fill="#000000" font-family="sans-serif" font-size="14" lengthAdjust="spacing" textLength="60.5801" x="184.5449" y="107.292">Openfire</text></g><g class="participant participant-tail" data-entity-uid="part2" data-qualified-name="Openfire" id="part2-tail"><rect fill="#E2E2F0" height="30.2969" rx="2.5" ry="2.5" style="stroke:#181818;stroke-width:0.5;" width="74.5801" x="177.5449" y="312.3906"/><text fill="#000000" font-family="sans-serif" font-size="14" lengthAdjust="spacing" textLength="60.5801" x="184.5449" y="332.3857">Openfire</text></g><g class="participant participant-head" data-entity-uid="part3" data-qualified-name="n8n" id="part3-head"><rect fill="#E2E2F0" height="30.2969" rx="2.5" ry="2.5" style="stroke:#181818;stroke-width:0.5;" width="40.6533" x="341.7163" y="87.2969"/><text fill="#000000" font-family="sans-serif" font-size="14" lengthAdjust="spacing" textLength="26.6533" x="348.7163" y="107.292">n8n</text></g><g class="participant participant-tail" data-entity-uid="part3" data-qualified-name="n8n" id="part3-tail"><rect fill="#E2E2F0" height="30.2969" rx="2.5" ry="2.5" style="stroke:#181818;stroke-width:0.5;" width="40.6533" x="341.7163" y="312.3906"/><text fill="#000000" font-family="sans-serif" font-size="14" lengthAdjust="spacing" textLength="26.6533" x="348.7163" y="332.3857">n8n</text></g><g class="participant participant-head" data-entity-uid="part4" data-qualified-name="Ollama" id="part4-head"><rect fill="#E2E2F0" height="30.2969" rx="2.5" ry="2.5" style="stroke:#181818;stroke-width:0.5;" width="63.5947" x="501.543" y="87.2969"/><text fill="#000000" font-family="sans-serif" font-size="14" lengthAdjust="spacing" textLength="49.5947" x="508.543" y="107.292">Ollama</text></g><g class="participant participant-tail" data-entity-uid="part4" data-qualified-name="Ollama" id="part4-tail"><rect fill="#E2E2F0" height="30.2969" rx="2.5" ry="2.5" style="stroke:#181818;stroke-width:0.5;" width="63.5947" x="501.543" y="312.3906"/><text fill="#000000" font-family="sans-serif" font-size="14" lengthAdjust="spacing" textLength="49.5947" x="508.543" y="332.3857">Ollama</text></g><g class="message" data-entity-1="part1" data-entity-2="part2" id="msg1"><polygon fill="#181818" points="202.835,145.7266,212.835,149.7266,202.835,153.7266,206.835,149.7266" style="stroke:#181818;stroke-width:1;"/><line style="stroke:#181818;stroke-width:1;" x1="73.4097" x2="208.835" y1="149.7266" y2="149.7266"/><text fill="#000000" font-family="sans-serif" font-size="13" lengthAdjust="spacing" textLength="95.2974" x="80.4097" y="144.6606">Send message</text></g><g class="message" data-entity-1="part2" data-entity-2="part3" id="msg2"><polygon fill="#181818" points="350.043,174.8594,360.043,178.8594,350.043,182.8594,354.043,178.8594" style="stroke:#181818;stroke-width:1;"/><line style="stroke:#181818;stroke-width:1;" x1="214.835" x2="356.043" y1="178.8594" y2="178.8594"/><text fill="#000000" font-family="sans-serif" font-size="13" lengthAdjust="spacing" textLength="122.3003" x="221.835" y="173.7935">Forwards message</text></g><g class="message" data-entity-1="part3" data-entity-2="part4" id="msg3"><polygon fill="#181818" points="521.3403,203.9922,531.3403,207.9922,521.3403,211.9922,525.3403,207.9922" style="stroke:#181818;stroke-width:1;"/><line style="stroke:#181818;stroke-width:1;" x1="362.043" x2="527.3403" y1="207.9922" y2="207.9922"/><text fill="#000000" font-family="sans-serif" font-size="13" lengthAdjust="spacing" textLength="147.2974" x="369.043" y="202.9263">Ask LLM with message</text></g><g class="message" data-entity-1="part4" data-entity-2="part3" id="msg4"><polygon fill="#181818" points="373.043,233.125,363.043,237.125,373.043,241.125,369.043,237.125" style="stroke:#181818;stroke-width:1;"/><line style="stroke:#181818;stroke-width:1;" x1="367.043" x2="532.3403" y1="237.125" y2="237.125"/><text fill="#000000" font-family="sans-serif" font-size="13" lengthAdjust="spacing" textLength="137.249" x="379.043" y="232.0591">Return LLM response</text></g><g class="message" data-entity-1="part3" data-entity-2="part2" id="msg5"><polygon fill="#181818" points="225.835,262.2578,215.835,266.2578,225.835,270.2578,221.835,266.2578" style="stroke:#181818;stroke-width:1;"/><line style="stroke:#181818;stroke-width:1;" x1="219.835" x2="361.043" y1="266.2578" y2="266.2578"/><text fill="#000000" font-family="sans-serif" font-size="13" lengthAdjust="spacing" textLength="123.208" x="231.835" y="261.1919">Forwards response</text></g><g class="message" data-entity-1="part2" data-entity-2="part1" id="msg6"><polygon fill="#181818" points="84.4097,291.3906,74.4097,295.3906,84.4097,299.3906,80.4097,295.3906" style="stroke:#181818;stroke-width:1;"/><line style="stroke:#181818;stroke-width:1;" x1="78.4097" x2="213.835" y1="295.3906" y2="295.3906"/><text fill="#000000" font-family="sans-serif" font-size="13" lengthAdjust="spacing" textLength="117.4253" x="90.4097" y="290.3247">Delivery response</text></g><?plantuml-src LP11IyGm48Nl-HNZdlHWSvKYWYY2kCL54Rp9sCwseMbI9fCj_dlJhBQxnxmyllSb5yRLDZO4dSWOIgqPfw8rqiNl68XhxuIS5BKVT6Nw3erzOJoG13tqZQ_3rnW7gmSCGgobeu62RcYFqOgsfksac0jAZ5Y2psgtWmTh4X5kh-_WTIItDqpvu6xSCRGM1uJjjeBdDDuoYl5EOIsUOVEHfE3o17Ir0Gmmnsf45bER4HF-7tqMfedpKfvIAaDFVKfu9zT0Uap0bjII_scMyEHvGcx2KfdZLRw4-z3d9qpfArVEyNQXl954Thd754RlmWfQLPQjfNFgazrBU2Hh3iG_I-aN?></g></svg></div><div class="puml dark" style=""><svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" contentStyleType="text/css" data-diagram-type="SEQUENCE" height="395px" preserveAspectRatio="xMidYMid meet" style="width:576px;height:395px;background:#1B1B1B;" version="1.1" viewBox="0 0 576 395" width="576px" zoomAndPan="magnify" class="diagram"><defs/><g><rect fill="#1B1B1B" height="395" style="stroke:none;stroke-width:1;" width="576" x="0" y="0"/><g class="title" data-source-line="2"><text fill="#FFFFFF" font-family="sans-serif" font-size="14" font-weight="bold" lengthAdjust="spacing" textLength="496.8701" x="36.1338" y="27.9951">XMPP Client &lt;-&gt; Openfire &lt;-&gt; n8n &lt;-&gt; Ollama LLM Integration</text></g><g class="participant-lifeline" data-entity-uid="part1" data-qualified-name="User" id="part1-lifeline"><g><title>User .XMPP Client.</title><rect fill="#000000" fill-opacity="0.00000" height="194.7969" width="8" x="69.4097" y="118.5938"/><line style="stroke:#E7E7E7;stroke-width:0.5;stroke-dasharray:5,5;" x1="73" x2="73" y1="118.5938" y2="313.3906"/></g></g><g class="participant-lifeline" data-entity-uid="part2" data-qualified-name="Openfire" id="part2-lifeline"><g><title>Openfire</title><rect fill="#000000" fill-opacity="0.00000" height="194.7969" width="8" x="210.835" y="118.5938"/><line style="stroke:#E7E7E7;stroke-width:0.5;stroke-dasharray:5,5;" x1="214.5449" x2="214.5449" y1="118.5938" y2="313.3906"/></g></g><g class="participant-lifeline" data-entity-uid="part3" data-qualified-name="n8n" id="part3-lifeline"><g><title>n8n</title><rect fill="#000000" fill-opacity="0.00000" height="194.7969" width="8" x="358.043" y="118.5938"/><line style="stroke:#E7E7E7;stroke-width:0.5;stroke-dasharray:5,5;" x1="361.7163" x2="361.7163" y1="118.5938" y2="313.3906"/></g></g><g class="participant-lifeline" data-entity-uid="part4" data-qualified-name="Ollama" id="part4-lifeline"><g><title>Ollama</title><rect fill="#000000" fill-opacity="0.00000" height="194.7969" width="8" x="529.3403" y="118.5938"/><line style="stroke:#E7E7E7;stroke-width:0.5;stroke-dasharray:5,5;" x1="532.543" x2="532.543" y1="118.5938" y2="313.3906"/></g></g><g class="participant participant-head" data-entity-uid="part1" data-qualified-name="User" id="part1-head"><text fill="#FFFFFF" font-family="sans-serif" font-size="14" lengthAdjust="spacing" textLength="130.8193" x="5" y="115.292">User (XMPP Client)</text><ellipse cx="73.4097" cy="50.7969" fill="#222222" rx="8" ry="8" style="stroke:#E7E7E7;stroke-width:0.5;"/><path d="M73.4097,58.7969 L73.4097,85.7969 M60.4097,66.7969 L86.4097,66.7969 M73.4097,85.7969 L60.4097,100.7969 M73.4097,85.7969 L86.4097,100.7969" fill="none" style="stroke:#E7E7E7;stroke-width:0.5;"/></g><g class="participant participant-tail" data-entity-uid="part1" data-qualified-name="User" id="part1-tail"><text fill="#FFFFFF" font-family="sans-serif" font-size="14" lengthAdjust="spacing" textLength="130.8193" x="5" y="325.3857">User (XMPP Client)</text><ellipse cx="73.4097" cy="337.1875" fill="#222222" rx="8" ry="8" style="stroke:#E7E7E7;stroke-width:0.5;"/><path d="M73.4097,345.1875 L73.4097,372.1875 M60.4097,353.1875 L86.4097,353.1875 M73.4097,372.1875 L60.4097,387.1875 M73.4097,372.1875 L86.4097,387.1875" fill="none" style="stroke:#E7E7E7;stroke-width:0.5;"/></g><g class="participant participant-head" data-entity-uid="part2" data-qualified-name="Openfire" id="part2-head"><rect fill="#222222" height="30.2969" rx="2.5" ry="2.5" style="stroke:#E7E7E7;stroke-width:0.5;" width="74.5801" x="177.5449" y="87.2969"/><text fill="#FFFFFF" font-family="sans-serif" font-size="14" lengthAdjust="spacing" textLength="60.5801" x="184.5449" y="107.292">Openfire</text></g><g class="participant participant-tail" data-entity-uid="part2" data-qualified-name="Openfire" id="part2-tail"><rect fill="#222222" height="30.2969" rx="2.5" ry="2.5" style="stroke:#E7E7E7;stroke-width:0.5;" width="74.5801" x="177.5449" y="312.3906"/><text fill="#FFFFFF" font-family="sans-serif" font-size="14" lengthAdjust="spacing" textLength="60.5801" x="184.5449" y="332.3857">Openfire</text></g><g class="participant participant-head" data-entity-uid="part3" data-qualified-name="n8n" id="part3-head"><rect fill="#222222" height="30.2969" rx="2.5" ry="2.5" style="stroke:#E7E7E7;stroke-width:0.5;" width="40.6533" x="341.7163" y="87.2969"/><text fill="#FFFFFF" font-family="sans-serif" font-size="14" lengthAdjust="spacing" textLength="26.6533" x="348.7163" y="107.292">n8n</text></g><g class="participant participant-tail" data-entity-uid="part3" data-qualified-name="n8n" id="part3-tail"><rect fill="#222222" height="30.2969" rx="2.5" ry="2.5" style="stroke:#E7E7E7;stroke-width:0.5;" width="40.6533" x="341.7163" y="312.3906"/><text fill="#FFFFFF" font-family="sans-serif" font-size="14" lengthAdjust="spacing" textLength="26.6533" x="348.7163" y="332.3857">n8n</text></g><g class="participant participant-head" data-entity-uid="part4" data-qualified-name="Ollama" id="part4-head"><rect fill="#222222" height="30.2969" rx="2.5" ry="2.5" style="stroke:#E7E7E7;stroke-width:0.5;" width="63.5947" x="501.543" y="87.2969"/><text fill="#FFFFFF" font-family="sans-serif" font-size="14" lengthAdjust="spacing" textLength="49.5947" x="508.543" y="107.292">Ollama</text></g><g class="participant participant-tail" data-entity-uid="part4" data-qualified-name="Ollama" id="part4-tail"><rect fill="#222222" height="30.2969" rx="2.5" ry="2.5" style="stroke:#E7E7E7;stroke-width:0.5;" width="63.5947" x="501.543" y="312.3906"/><text fill="#FFFFFF" font-family="sans-serif" font-size="14" lengthAdjust="spacing" textLength="49.5947" x="508.543" y="332.3857">Ollama</text></g><g class="message" data-entity-1="part1" data-entity-2="part2" id="msg1"><polygon fill="#E7E7E7" points="202.835,145.7266,212.835,149.7266,202.835,153.7266,206.835,149.7266" style="stroke:#E7E7E7;stroke-width:1;"/><line style="stroke:#E7E7E7;stroke-width:1;" x1="73.4097" x2="208.835" y1="149.7266" y2="149.7266"/><text fill="#FFFFFF" font-family="sans-serif" font-size="13" lengthAdjust="spacing" textLength="95.2974" x="80.4097" y="144.6606">Send message</text></g><g class="message" data-entity-1="part2" data-entity-2="part3" id="msg2"><polygon fill="#E7E7E7" points="350.043,174.8594,360.043,178.8594,350.043,182.8594,354.043,178.8594" style="stroke:#E7E7E7;stroke-width:1;"/><line style="stroke:#E7E7E7;stroke-width:1;" x1="214.835" x2="356.043" y1="178.8594" y2="178.8594"/><text fill="#FFFFFF" font-family="sans-serif" font-size="13" lengthAdjust="spacing" textLength="122.3003" x="221.835" y="173.7935">Forwards message</text></g><g class="message" data-entity-1="part3" data-entity-2="part4" id="msg3"><polygon fill="#E7E7E7" points="521.3403,203.9922,531.3403,207.9922,521.3403,211.9922,525.3403,207.9922" style="stroke:#E7E7E7;stroke-width:1;"/><line style="stroke:#E7E7E7;stroke-width:1;" x1="362.043" x2="527.3403" y1="207.9922" y2="207.9922"/><text fill="#FFFFFF" font-family="sans-serif" font-size="13" lengthAdjust="spacing" textLength="147.2974" x="369.043" y="202.9263">Ask LLM with message</text></g><g class="message" data-entity-1="part4" data-entity-2="part3" id="msg4"><polygon fill="#E7E7E7" points="373.043,233.125,363.043,237.125,373.043,241.125,369.043,237.125" style="stroke:#E7E7E7;stroke-width:1;"/><line style="stroke:#E7E7E7;stroke-width:1;" x1="367.043" x2="532.3403" y1="237.125" y2="237.125"/><text fill="#FFFFFF" font-family="sans-serif" font-size="13" lengthAdjust="spacing" textLength="137.249" x="379.043" y="232.0591">Return LLM response</text></g><g class="message" data-entity-1="part3" data-entity-2="part2" id="msg5"><polygon fill="#E7E7E7" points="225.835,262.2578,215.835,266.2578,225.835,270.2578,221.835,266.2578" style="stroke:#E7E7E7;stroke-width:1;"/><line style="stroke:#E7E7E7;stroke-width:1;" x1="219.835" x2="361.043" y1="266.2578" y2="266.2578"/><text fill="#FFFFFF" font-family="sans-serif" font-size="13" lengthAdjust="spacing" textLength="123.208" x="231.835" y="261.1919">Forwards response</text></g><g class="message" data-entity-1="part2" data-entity-2="part1" id="msg6"><polygon fill="#E7E7E7" points="84.4097,291.3906,74.4097,295.3906,84.4097,299.3906,80.4097,295.3906" style="stroke:#E7E7E7;stroke-width:1;"/><line style="stroke:#E7E7E7;stroke-width:1;" x1="78.4097" x2="213.835" y1="295.3906" y2="295.3906"/><text fill="#FFFFFF" font-family="sans-serif" font-size="13" lengthAdjust="spacing" textLength="117.4253" x="90.4097" y="290.3247">Delivery response</text></g><?plantuml-src LP31IiGm48RlUOfnJtgmkKeHGHH1tEAY2DvaR6RRq3Gfa-aMtzuqg-tkCV_yVFDDBgoltMW8Mf4XbbepJaLZfHs_nqXS1o_afQX3holRjMZT2-E19Eg-Cw6ENyFOEzrZ568jBVKKjQ4zZawqGUwAUQx4YYFuh7OxU70s0U7s-WvU1_9xovGV_iOVG-UmHzXkAtXEknj6iS4hh2KmR3wI4roUWAusW17cM0t8OcixOCB_ey_2jEAyb5SfbQ6dFYMyapUGRedOa5hoFyqIdW9Fo2OkbJbUvKkuZrq-OKe_kNAEquNoHZAoppscE0GVLz2giknQEgS-sRs4HtBsGFopb7u1?></g></svg></div></div>
+
+<p>When it's running, is possible to "talk" with Ollama using jabber/xmpp client using n8n workflows.</p>
+<p>You can use any XMPP client (such as Pidgin, Gajim, Dino, Profanity) to connect to the Openfire server.
+Web-xmpp included inside openfire, no need to install xmpp client to test.</p>
+<p>A n8n workflow acts as a bridge, receiving messages from the user and sending them to the LLM running on Ollama, then
+returning the response directly in the chat.</p>
+<p>Don't worry... n8n is not just a bridge, you can create more complex workflows, expose MCP tools to the LLM (like ssh
+and playright, custom MCP servers), RAG, VectorDB, and <strong>much more</strong>.</p>
+<h3 id="why-jabberxmpp">Why jabber/xmpp?</h3>
+<p>This is old stuff! What's next? Using irc, or BBS with phone lines?</p>
+<p>XMPP is an open standard protocol, and running your own XMPP server gives you full control over your data and privacy.
+Don't need to rely on third-party services and their rules and rate limits.</p>
+<p>Also, after installing, your setup is 100% off-grid, no internet required.</p>
+<p>But... I like the irc idea... maybe in the future. For now, using profanity xmpp client in terminal is fun enough.</p>
+<hr />
+<p>It's possible to use another chat integration instead of xmpp/openfire, like discord, slack, telegram, whatsapp, etc.
+Just change the n8n workflow to use the desired chat node.</p>
+<hr />
+<h2 id="kubernetes-namespace">Kubernetes namespace</h2>
+<p>uaiso deployments/statefulsets details</p>
+<hr />
+<h3 id="ollama">Ollama</h3>
+<ul>
+<li>url: http://ollama-service.uaiso.svc.cluster.local:11434 (k8s internal)</li>
+<li>http ingress: <a href="http://ollama.uaiso.lan">http://ollama.uaiso.lan</a></li>
+<li>no apikey</li>
+</ul>
+<hr />
+<h3 id="openfire">Openfire</h3>
+<ul>
+<li>ip: &lt;your-k3s-ipv4&gt;</li>
+<li>url xmpp: <a href="http://xmpp.uaiso.lan/">http://xmpp.uaiso.lan/</a></li>
+<li>url adm: <a href="http://xmpp-adm.uaiso.lan/">http://xmpp-adm.uaiso.lan/</a></li>
+<li>port: 5222 tcp/xmpp</li>
+<li>user: admin</li>
+<li>password: admin</li>
+</ul>
+<p>using restApi plugin:</p>
+<p>readiness check:</p>
+<pre><code class="language-bash">curl 'http://xmpp-adm.uaiso.lan/plugins/restapi/v1/system/readiness' -v
+</code></pre>
+<p>create user example mybot:</p>
+<pre><code class="language-bash">curl \
+  'http://xmpp-adm.uaiso.lan/plugins/restapi/v1/users' \
+  -H 'Authorization: secretkey123' \
+  -H 'Content-Type: application/json' \
+  -d '{&quot;username&quot;: &quot;mybot&quot;,&quot;password&quot;: &quot;123&quot;}'
+</code></pre>
+<p>add roster entry (friend mybot to admin):</p>
+<pre><code class="language-bash">curl \
+  'http://xmpp-adm.uaiso.lan/plugins/restapi/v1/users/admin/roster' \
+  -H 'accept: */*' \
+  -H 'Authorization: secretkey123' \
+  -H 'Content-Type: application/json' \
+  -d '{&quot;jid&quot;: &quot;mybot@xmpp.uaiso.lan&quot;,&quot;nickname&quot;: &quot;mybot&quot;,&quot;subscriptionType&quot;: 1}'
+</code></pre>
+<p>Openfire admin panel (clickops):</p>
+<ul>
+<li>url adm: <a href="http://xmpp-adm.uaiso.lan/">http://xmpp-adm.uaiso.lan/</a></li>
+<li>user: admin</li>
+<li>password: admin</li>
+</ul>
+<hr />
+<h3 id="rabbitmq">RabbitMQ</h3>
+<ul>
+<li>dns: rabbitmq-lb.uaiso.svc.cluster.local (k8s internal)</li>
+<li>port: 5672 tcp/ampq</li>
+<li>url management: <a href="http://rabbitmq.uaiso.lan">http://rabbitmq.uaiso.lan</a></li>
+<li>user: user</li>
+<li>password: password</li>
+<li>vhost: /</li>
+</ul>
+<hr />
+<h3 id="n8n">n8n</h3>
+<p><a href="http://n8n.uaiso.lan/">http://n8n.uaiso.lan/</a></p>
+<ul>
+<li>email: admin@uaiso.lan</li>
+<li>password: Admin123</li>
+</ul>
+
+
+
+
+
+
+
+
+
+
+
+
+                
+              </article>
+            </div>
+          
+          
+<script>var target=document.getElementById(location.hash.slice(1));target&&target.name&&(target.checked=target.name.startsWith("__tabbed_"))</script>
+        </div>
+        
+      </main>
+      
+        <footer class="md-footer">
+  
+  <div class="md-footer-meta md-typeset">
+    <div class="md-footer-meta__inner md-grid">
+      <div class="md-copyright">
+  
+  
+    Made with
+    <a href="https://squidfunk.github.io/mkdocs-material/" target="_blank" rel="noopener">
+      Material for MkDocs
+    </a>
+  
+</div>
+      
+    </div>
+  </div>
+</footer>
+      
+    </div>
+    <div class="md-dialog" data-md-component="dialog">
+      <div class="md-dialog__inner md-typeset"></div>
+    </div>
+    
+    
+    
+      
+      
+      <script id="__config" type="application/json">{"annotate": null, "base": "../..", "features": ["search.share"], "search": "../../assets/javascripts/workers/search.2c215733.min.js", "tags": null, "translations": {"clipboard.copied": "Copied to clipboard", "clipboard.copy": "Copy to clipboard", "search.result.more.one": "1 more on this page", "search.result.more.other": "# more on this page", "search.result.none": "No matching documents", "search.result.one": "1 matching document", "search.result.other": "# matching documents", "search.result.placeholder": "Type to start searching", "search.result.term.missing": "Missing", "select.version": "Select version"}, "version": null}</script>
+    
+    
+      <script src="../../assets/javascripts/bundle.79ae519e.min.js"></script>
+      
+        <script src="../../assets/mkdocs_puml/puml.js"></script>
+      
+        <script src="https://unpkg.com/@panzoom/panzoom@4.5.1/dist/panzoom.min.js"></script>
+      
+        <script src="../../assets/mkdocs_puml/interaction.js"></script>
+      
+    
+  </body>
+</html>
