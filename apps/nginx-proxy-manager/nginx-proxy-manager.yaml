@@ -1,0 +1,104 @@
+apiVersion: v1
+kind: Namespace
+metadata:
+  name: nginx-proxy-manager
+---
+apiVersion: v1
+kind: PersistentVolumeClaim
+metadata:
+  name: nginxproxymanager-data-pvc
+  namespace: nginx-proxy-manager
+spec:
+  accessModes:
+    - ReadWriteOnce
+  resources:
+    requests:
+      storage: 1Gi
+---
+apiVersion: v1
+kind: PersistentVolumeClaim
+metadata:
+  name: nginxproxymanager-letsencrypt-pvc
+  namespace: nginx-proxy-manager
+spec:
+  accessModes:
+    - ReadWriteOnce
+  resources:
+    requests:
+      storage: 1Gi
+---
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: nginxproxymanager
+  namespace: nginx-proxy-manager
+  labels:
+    app: nginxproxymanager
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: nginxproxymanager
+  template:
+    metadata:
+      labels:
+        app: nginxproxymanager
+    spec:
+      containers:
+        - name: nginxproxymanager
+          image: jc21/nginx-proxy-manager:latest
+          ports:
+            - containerPort: 80
+            - containerPort: 81
+            - containerPort: 443
+          volumeMounts:
+            - name: data-volume
+              mountPath: /data
+            - name: letsencrypt-volume
+              mountPath: /etc/letsencrypt
+      volumes:
+        - name: data-volume
+          persistentVolumeClaim:
+            claimName: nginxproxymanager-data-pvc
+        - name: letsencrypt-volume
+          persistentVolumeClaim:
+            claimName: nginxproxymanager-letsencrypt-pvc
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: nginxproxymanager-service
+  namespace: nginx-proxy-manager
+spec:
+  type: ClusterIP
+  selector:
+    app: nginxproxymanager
+  ports:
+    - name: http
+      port: 80
+      targetPort: 80
+    - name: admin
+      port: 81
+      targetPort: 81
+    - name: https
+      port: 443
+      targetPort: 443
+---
+apiVersion: networking.k8s.io/v1
+kind: Ingress
+metadata:
+  name: nginxproxymanager
+  annotations:
+    traefik.ingress.kubernetes.io/router.entrypoints: web
+spec:
+  rules:
+    - host: nginx-proxy-manager.uaiso.duckdns.org
+      http:
+        paths:
+          - path: /
+            pathType: Prefix
+            backend:
+              service:
+                name: nginxproxymanager-service
+                port:
+                  number: 81

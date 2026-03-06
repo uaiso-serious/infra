@@ -49,6 +49,7 @@ applications:
   - name: mcp-inspector
   - name: n8n
   - name: nextcloud
+  - name: nginx-proxy-manager
   - name: ollama-cpu
   - name: ollama-cuda
   - name: onedev
