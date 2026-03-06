@@ -1,0 +1,58 @@
+apiVersion: batch/v1
+kind: Job
+metadata:
+  name: erpnext-setup
+  namespace: erpnext
+  annotations:
+    argocd.argoproj.io/sync-wave: "1"
+spec:
+  backoffLimit: 3
+  template:
+    spec:
+      restartPolicy: Never
+      containers:
+        - name: configurator-and-create-site
+          image: frappe/erpnext:v16.7.3
+          env:
+            - name: DB_HOST
+              value: "db"
+            - name: DB_PORT
+              value: "3306"
+            - name: REDIS_CACHE
+              value: "redis-cache:6379"
+            - name: REDIS_QUEUE
+              value: "redis-queue:6379"
+            - name: SOCKETIO_PORT
+              value: "9000"
+          command:
+            - "bash"
+            - "-c"
+          args:
+            - |
+              wait-for-it -t 120 db:3306
+              wait-for-it -t 120 redis-cache:6379
+              wait-for-it -t 120 redis-queue:6379
+              
+              ls -1 apps > sites/apps.txt
+              echo "{}" > sites/common_site_config.json
+              bench set-config -g db_host $DB_HOST
+              bench set-config -gp db_port $DB_PORT
+              bench set-config -g redis_cache "redis://$REDIS_CACHE"
+              bench set-config -g redis_queue "redis://$REDIS_QUEUE"
+              bench set-config -g redis_socketio "redis://$REDIS_QUEUE"
+              bench set-config -gp socketio_port $SOCKETIO_PORT
+              
+              bench new-site --mariadb-user-host-login-scope='%' --admin-password=admin --db-root-username=root --db-root-password=admin --install-app erpnext --set-default frontend
+              
+          volumeMounts:
+            - name: sites
+              mountPath: /home/frappe/frappe-bench/sites
+            - name: logs
+              mountPath: /home/frappe/frappe-bench/logs
+      volumes:
+        - name: sites
+          persistentVolumeClaim:
+            claimName: sites-pvc
+        - name: logs
+          persistentVolumeClaim:
+            claimName: logs-pvc

@@ -2,9 +2,8 @@
 
 Why ERPnext? Not AI related, but possible to control entire business using LLM with MCP and API.
 
-Not running inside k3s yet, docker-compose only for now.
+Argocd ready.
 
-```bash
-cd docker
-docker compose up -d
-```
+If you don't have argocd, you can follow kubectl apply -f all yamls in this directory.
+
+Follow the argocd.argoproj.io/sync-wave orders and will be fine.

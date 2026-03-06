@@ -1,0 +1,94 @@
+apiVersion: v1
+kind: Service
+metadata:
+  name: frontend
+  annotations:
+    argocd.argoproj.io/sync-wave: "4"
+  namespace: erpnext
+  labels:
+    app: frontend
+spec:
+  selector:
+    app: frontend
+  ports:
+    - port: 8080
+      targetPort: 8080
+  type: ClusterIP
+
+---
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: frontend
+  namespace: erpnext
+  annotations:
+    argocd.argoproj.io/sync-wave: "4"
+  labels:
+    app: frontend
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: frontend
+  template:
+    metadata:
+      labels:
+        app: frontend
+    spec:
+      containers:
+        - name: frontend
+          image: frappe/erpnext:v16.7.3
+          args:
+            - "nginx-entrypoint.sh"
+          ports:
+            - containerPort: 8080
+          env:
+            - name: BACKEND
+              value: "backend:8000"
+            - name: FRAPPE_SITE_NAME_HEADER
+              value: "frontend"
+            - name: SOCKETIO
+              value: "websocket:9000"
+            - name: UPSTREAM_REAL_IP_ADDRESS
+              value: "127.0.0.1"
+            - name: UPSTREAM_REAL_IP_HEADER
+              value: "X-Forwarded-For"
+            - name: UPSTREAM_REAL_IP_RECURSIVE
+              value: "off"
+            - name: PROXY_READ_TIMEOUT
+              value: "120"
+            - name: CLIENT_MAX_BODY_SIZE
+              value: "50m"
+          volumeMounts:
+            - name: sites
+              mountPath: /home/frappe/frappe-bench/sites
+            - name: logs
+              mountPath: /home/frappe/frappe-bench/logs
+      volumes:
+        - name: sites
+          persistentVolumeClaim:
+            claimName: sites-pvc
+        - name: logs
+          persistentVolumeClaim:
+            claimName: logs-pvc
+---
+apiVersion: networking.k8s.io/v1
+kind: Ingress
+metadata:
+  name: erpnext-ingress
+  namespace: erpnext
+  annotations:
+    traefik.ingress.kubernetes.io/router.entrypoints: web
+    argocd.argoproj.io/sync-wave: "4"
+spec:
+  rules:
+    - host: erpnext.uaiso.duckdns.org
+      http:
+        paths:
+          - path: /
+            pathType: Prefix
+            backend:
+              service:
+                name: frontend
+                port:
+                  number: 8080

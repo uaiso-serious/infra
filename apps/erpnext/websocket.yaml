@@ -1,0 +1,61 @@
+apiVersion: v1
+kind: Service
+metadata:
+  name: websocket
+  namespace: erpnext
+  annotations:
+    argocd.argoproj.io/sync-wave: "4"
+  labels:
+    app: websocket
+spec:
+  selector:
+    app: websocket
+  ports:
+    - port: 9000
+      targetPort: 9000
+  type: ClusterIP
+---
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: websocket
+  namespace: erpnext
+  annotations:
+    argocd.argoproj.io/sync-wave: "4"
+  labels:
+    app: websocket
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: websocket
+  template:
+    metadata:
+      labels:
+        app: websocket
+    spec:
+      containers:
+        - name: websocket
+          image: frappe/erpnext:v16.7.3
+          args:
+            - "node"
+            - "/home/frappe/frappe-bench/apps/frappe/socketio.js"
+          ports:
+            - containerPort: 9000
+          env:
+            - name: FRAPPE_REDIS_CACHE
+              value: "redis://redis-cache:6379"
+            - name: FRAPPE_REDIS_QUEUE
+              value: "redis://redis-queue:6379"
+          volumeMounts:
+            - name: sites
+              mountPath: /home/frappe/frappe-bench/sites
+            - name: logs
+              mountPath: /home/frappe/frappe-bench/logs
+      volumes:
+        - name: sites
+          persistentVolumeClaim:
+            claimName: sites-pvc
+        - name: logs
+          persistentVolumeClaim:
+            claimName: logs-pvc

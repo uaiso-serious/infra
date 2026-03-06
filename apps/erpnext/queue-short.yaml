@@ -1,0 +1,44 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: queue-short
+  namespace: erpnext
+  annotations:
+    argocd.argoproj.io/sync-wave: "2"
+  labels:
+    app: queue-short
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: queue-short
+  template:
+    metadata:
+      labels:
+        app: queue-short
+    spec:
+      containers:
+        - name: worker
+          image: frappe/erpnext:v16.7.3
+          args:
+            - "bench"
+            - "worker"
+            - "--queue"
+            - "short,default"
+          env:
+            - name: FRAPPE_REDIS_CACHE
+              value: "redis://redis-cache:6379"
+            - name: FRAPPE_REDIS_QUEUE
+              value: "redis://redis-queue:6379"
+          volumeMounts:
+            - name: sites
+              mountPath: /home/frappe/frappe-bench/sites
+            - name: logs
+              mountPath: /home/frappe/frappe-bench/logs
+      volumes:
+        - name: sites
+          persistentVolumeClaim:
+            claimName: sites-pvc
+        - name: logs
+          persistentVolumeClaim:
+            claimName: logs-pvc
