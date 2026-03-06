@@ -92,7 +92,7 @@ metadata:
     traefik.ingress.kubernetes.io/router.entrypoints: web
 spec:
   rules:
-    - host: nginx-proxy-manager.uaiso.duckdns.org
+    - host: nginx-proxy-manager.uaiso.lan
       http:
         paths:
           - path: /
