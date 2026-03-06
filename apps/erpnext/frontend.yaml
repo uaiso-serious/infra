@@ -82,7 +82,7 @@ metadata:
     argocd.argoproj.io/sync-wave: "4"
 spec:
   rules:
-    - host: erpnext.uaiso.duckdns.org
+    - host: erpnext.uaiso.lan
       http:
         paths:
           - path: /
