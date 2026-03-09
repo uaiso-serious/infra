@@ -81,7 +81,15 @@ and playright, custom MCP servers), RAG, VectorDB, and **much more**.
 This is old stuff! What's next? Using irc, or BBS with phone lines?
 
 XMPP is an open standard protocol, and running your own XMPP server gives you full control over your data and privacy.
-Don't need to rely on third-party services and their rules and rate limits.
+Don't need to rely on third-party services and their rules and rate limits (and their bad C-level decisions).
+
+Recently, Meta did some changes to their terms of service, saying that it's not allowed to use their whatsapp service
+with AI agents. Brazil and Italy blocked that terms of service, so Meta will charge for AI usage in whatsapp.
+
+Discord said that will not allow child accounts, so they had the brilliant idea to ask personal documents to verify the
+age of the users.
+
+Telegram can be blocked in some countries, and they had some issues with their bot API in the past.
 
 Also, after installing, your setup is 100% off-grid, no internet required.
 
