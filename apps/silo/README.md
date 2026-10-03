@@ -7,7 +7,7 @@ http web-ui ingress: [http://silo.uaiso.lan](http://silo.uaiso.lan)
 http api ingress: [http://silo-api.uaiso.lan](http://silo-api.uaiso.lan)
 
 - access_key/user: admin
-- secret_key/password: admin
+- secret_key/password: adminadmin
 
 ```bash
 kubectl apply -f silo.yaml
