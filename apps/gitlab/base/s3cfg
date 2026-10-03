@@ -1,0 +1,4 @@
+[default]
+access_key = admin
+host_base = siloapi.gitlab.svc.cluster.local
+secret_key = adminadmin

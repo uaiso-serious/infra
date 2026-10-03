@@ -1,0 +1,68 @@
+certmanager-issuer:
+  email: me@uaiso.lan
+global:
+  edition: ce
+  hosts:
+    domain: uaiso.lan
+    externalIp: <your-k3s-ip>
+    https: false
+  initialRootPassword:
+    secret: gitlab-initial-root-passwd
+    key: password
+  psql:
+    host: postgresql.gitlab.svc.cluster.local
+    username: postgres
+    database: gitlab
+    password:
+      secret: postgresql
+      key: password
+  redis:
+    auth:
+      enabled: false
+    host: valkey.gitlab.svc.cluster.local
+  appConfig:
+    artifacts:
+      enabled: false
+    lfs:
+      enabled: false
+    packages:
+      enabled: false
+    uploads:
+      enabled: false
+  gatewayApi:
+    enabled: false
+    installEnvoy: false
+  registry:
+    enabled: false
+  ingress:
+    enabled: true
+    provider: traefik
+    class: traefik
+    tls:
+      enabled: false
+    annotations:
+      traefik.ingress.kubernetes.io/router.tls: "false"
+      traefik.ingress.kubernetes.io/router.entrypoints: web, websecure
+
+gitlab:
+  gitlab-shell:
+    enabled: false
+  webservice:
+    minReplicas: 1
+  kas:
+    minReplicas: 1
+  toolbox:
+    backups:
+      objectStorage:
+        config:
+          secret: s3cmd-config
+          key: s3cfg
+
+prometheus:
+  install: false
+gitlab-runner:
+  install: false
+registry:
+  enabled: false
+
+installCertmanager: false
