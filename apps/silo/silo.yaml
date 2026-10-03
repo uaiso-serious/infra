@@ -1,0 +1,114 @@
+apiVersion: v1
+kind: Namespace
+metadata:
+  name: silo
+---
+apiVersion: apps/v1
+kind: StatefulSet
+metadata:
+  name: silo
+  namespace: silo
+spec:
+  serviceName: silo
+  replicas: 1
+  selector:
+    matchLabels:
+      app: silo
+  template:
+    metadata:
+      labels:
+        app: silo
+    spec:
+      containers:
+        - name: silo
+          image: pgsty/minio:RELEASE.2026-06-18T00-00-00Z
+          args:
+            - server
+            - /data
+            - --console-address
+            - ":9001"
+          ports:
+            - containerPort: 9000
+              name: api
+            - containerPort: 9001
+              name: console
+          env:
+            - name: MINIO_ROOT_USER
+              value: admin
+            - name: MINIO_ROOT_PASSWORD
+              value: adminadmin
+          volumeMounts:
+            - name: silo-data
+              mountPath: /data
+      volumes:
+        - name: silo-data
+          persistentVolumeClaim:
+            claimName: silo-data
+---
+apiVersion: v1
+kind: PersistentVolumeClaim
+metadata:
+  name: silo-data
+  namespace: silo
+spec:
+  accessModes:
+    - ReadWriteOnce
+  resources:
+    requests:
+      storage: 10Gi
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: silo
+  namespace: silo
+spec:
+  ports:
+    - port: 9000
+      name: api
+      targetPort: 9000
+    - port: 9001
+      name: console
+      targetPort: 9001
+  selector:
+    app: silo
+---
+apiVersion: networking.k8s.io/v1
+kind: Ingress
+metadata:
+  name: silo
+  namespace: silo
+  annotations:
+    traefik.ingress.kubernetes.io/router.entrypoints: web
+spec:
+  rules:
+    - host: silo.uaiso.lan
+      http:
+        paths:
+          - path: /
+            pathType: Prefix
+            backend:
+              service:
+                name: silo
+                port:
+                  number: 9001
+---
+apiVersion: networking.k8s.io/v1
+kind: Ingress
+metadata:
+  name: siloapi
+  namespace: silo
+  annotations:
+    traefik.ingress.kubernetes.io/router.entrypoints: web
+spec:
+  rules:
+    - host: silo-api.uaiso.lan
+      http:
+        paths:
+          - path: /
+            pathType: Prefix
+            backend:
+              service:
+                name: silo
+                port:
+                  number: 9000
