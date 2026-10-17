@@ -1,0 +1,9 @@
+s3:
+  accesskey: "admin"
+  secretkey: "adminadmin"
+  region: "us-east-1"
+  regionendpoint: "http://siloapi-gl.uaiso.lan"
+  bucket: "gitlab-registry-storage"
+  secure: false
+  v4auth: true
+  forcepathstyle: true

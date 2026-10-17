@@ -1,0 +1,6 @@
+provider: AWS
+aws_access_key_id: "admin"
+aws_secret_access_key: "adminadmin"
+endpoint: "http://silo.gitlab.svc.cluster.local:9000"
+region: "us-east-1"
+path_style: true

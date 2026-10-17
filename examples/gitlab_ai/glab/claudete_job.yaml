@@ -1,0 +1,26 @@
+apiVersion: batch/v1
+kind: Job
+metadata:
+  name: claudete-issue-%ISSUE_ID%
+spec:
+  backoffLimit: 0
+  activeDeadlineSeconds: 300
+  ttlSecondsAfterFinished: 60
+  template:
+    spec:
+      containers:
+        - name: claudete
+          image: registry.gitlab.com/nilzao/claudete:latest
+          args:
+            - "siga o fluxo da tarefa"
+          env:
+            - name: ISSUE_ID
+              value: "%ISSUE_ID%"
+          envFrom:
+            - configMapRef:
+                name: claudete-config
+            - secretRef:
+                name: claudete-secrets
+            - secretRef:
+                name: bot-git-token
+      restartPolicy: Never

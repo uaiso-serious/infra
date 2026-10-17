@@ -1,0 +1,20 @@
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: claudete-config
+  namespace: gitlab
+data:
+  GIT_REPO_URL: "http://gitlab.uaiso.lan/root/demo.git"
+  GIT_BASE_BRANCH: "main"
+  GIT_BRANCH: "claudete/minha-tarefa"
+  GIT_USER_NAME: "Claudete"
+  GIT_USER_EMAIL: "claudete@gohorse.com.br"
+  GIT_CO_AUTHOR: "Fulano de Tal <fulano@example.com>"
+  ANTHROPIC_BASE_URL: "https://ollama.com"
+  CLAUDE_CODE_MAX_CONTEXT_TOKENS: "128000"
+  CLAUDE_CODE_ATTRIBUTION_HEADER: "0"
+  MODEL: "gpt-oss:20b"
+  API_TIMEOUT_MS: "3600000"
+#  LANGFUSE_SECRET_KEY: "sk-lf-bbbb-aaaa-yyyy-xxxx-zzz"
+#  LANGFUSE_PUBLIC_KEY: "pk-lf-cccc-aaaa-yyyy-xxxx-zzz"
+#  LANGFUSE_BASE_URL: "http://langfuse.uaiso.lan"

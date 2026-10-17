@@ -1,0 +1,42 @@
+run_claudete_job:
+  stage: deploy
+  image: alpine/kubectl:1.37.1
+  rules:
+    - if: $CI_PIPELINE_SOURCE == "trigger"
+  script:
+    - apk add --no-cache jq
+    - echo -------
+    - echo $KUBE_CONFIG
+    - echo -------
+    - cat $KUBE_CONFIG
+    - echo -------
+    - echo $TRIGGER_PAYLOAD
+    - echo -------
+    - cat $TRIGGER_PAYLOAD
+    - echo -------
+    - cat $TRIGGER_PAYLOAD | jq
+    - echo -------
+    - |
+      BOT_ID=2
+      EVENT_TYPE=$(jq -r '.event_type' "${TRIGGER_PAYLOAD}")
+      if [ "${EVENT_TYPE}" = 'issue' ]; then
+        ISSUE_STATE=$(jq -r '.object_attributes.state' "${TRIGGER_PAYLOAD}")
+        if [ "${ISSUE_STATE}" != 'closed' ] ; then
+          ISSUE_ID=$(jq -r '.object_attributes.id' "${TRIGGER_PAYLOAD}")
+          echo "issue criada/editada ${ISSUE_ID}"
+          sed -i "s/%ISSUE_ID%/${ISSUE_ID}/g" claudete_job.yaml
+          kubectl --kubeconfig $KUBE_CONFIG -n gitlab apply -f claudete_job.yaml
+        fi
+      elif [ "${EVENT_TYPE}" = 'note'  ] ; then
+        AUTHOR_ID=$(jq -r '.object_attributes.author_id' "${TRIGGER_PAYLOAD}")
+        if [ "${AUTHOR_ID}" != "${BOT_ID}" ] ; then
+          ISSUE_STATE=$(jq -r '.issue.state' "${TRIGGER_PAYLOAD}")
+          if [ "${ISSUE_STATE}" != 'closed' ] ; then
+            ISSUE_ID=$(jq -r '.issue.id' "${TRIGGER_PAYLOAD}")
+            echo "issue comentada por usuario diferente do bot ${ISSUE_ID}"
+            sed -i "s/%ISSUE_ID%/${ISSUE_ID}/g" claudete_job.yaml
+            kubectl --kubeconfig $KUBE_CONFIG -n gitlab apply -f claudete_job.yaml
+          fi
+        fi
+      fi
+    - echo 'no op'
