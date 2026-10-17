@@ -35,5 +35,5 @@ run helm chart
 helm upgrade --install gitlab gitlab/gitlab \
   -n gitlab --create-namespace \
   --values values.yaml \
-  --version 10.4.1
+  --version 10.4.2
 ```
