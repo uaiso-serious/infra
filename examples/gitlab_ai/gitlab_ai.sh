@@ -69,7 +69,7 @@ kubectl -n gitlab \
 until kubectl -n gitlab get pod glab-runner &> /dev/null; do
   sleep 1
 done
-kubectl -n gitlab wait --for=condition=Ready pod/glab-runner --timeout=0
+kubectl -n gitlab wait --for=condition=Ready pod/glab-runner --timeout=300s
 
 kubectl -n gitlab cp glab/install.sh glab-runner:/tmp
 kubectl -n gitlab cp glab/claudete-ci.yaml glab-runner:/tmp
