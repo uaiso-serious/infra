@@ -69,7 +69,7 @@ kubectl wait --for=condition=Ready pod/glab-runner --timeout=120s
 kubectl -n gitlab cp glab/install.sh glab-runner:/tmp
 kubectl -n gitlab cp glab/claudete-ci.yaml glab-runner:/tmp
 kubectl -n gitlab cp glab/claudete_job.yaml glab-runner:/tmp
-kubectl -n gitlab cp "$HOME/.kube/config" glab-runner:/tmp/kube_config
+kubectl -n gitlab cp "$HOME/.kube/config_ip" glab-runner:/tmp/kube_config
 kubectl -n gitlab exec glab-runner -- ash -c '
 /tmp/install.sh > /tmp/log.txt
 '
