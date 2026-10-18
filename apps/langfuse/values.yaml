@@ -7,3 +7,9 @@ langfuse:
         paths:
           - path: /
             pathType: ImplementationSpecific
+  # migrations killed before finish with slow disk io
+  web:
+    livenessProbe:
+      initialDelaySeconds: 600
+    readinessProbe:
+      initialDelaySeconds: 600
