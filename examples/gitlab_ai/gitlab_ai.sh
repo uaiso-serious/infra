@@ -63,8 +63,10 @@ kubectl -n gitlab \
   --env="GITLAB_HOST=http://gitlab-webservice-default.gitlab.svc.cluster.local:8181" \
   --env="GITLAB_TOKEN=${TOKEN_ROOT}" \
   --command -- sh -c "glab config set api_protocol http --host gitlab-webservice-default.gitlab.svc.cluster.local:8181; sleep infinity"
-sleep 60
-kubectl wait --for=condition=Ready pod/glab-runner --timeout=120s
+until kubectl -n gitlab get pod glab-runner &> /dev/null; do
+  sleep 1
+done
+kubectl -n gitlab wait --for=condition=Ready pod/glab-runner --timeout=120s
 
 kubectl -n gitlab cp glab/install.sh glab-runner:/tmp
 kubectl -n gitlab cp glab/claudete-ci.yaml glab-runner:/tmp
