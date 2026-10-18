@@ -1,0 +1,52 @@
+langfuse:
+  ingress:
+    enabled: true
+    className: traefik
+    hosts:
+      - host: "langfuse.uaiso.lan"
+        paths:
+          - path: /
+            pathType: ImplementationSpecific
+  web:
+    livenessProbe:
+      initialDelaySeconds: 600
+    readinessProbe:
+      initialDelaySeconds: 600
+    pod:
+      additionalEnv:
+        - name: LANGFUSE_INIT_ORG_ID
+          value: "uaiso-serious"
+        - name: LANGFUSE_INIT_ORG_NAME
+          value: "Uai So Serious"
+        - name: LANGFUSE_INIT_PROJECT_ID
+          value: "demo-1"
+        - name: LANGFUSE_INIT_PROJECT_NAME
+          value: "Demo Project"
+        - name: LANGFUSE_INIT_PROJECT_PUBLIC_KEY
+          value: "pk-lf-your-public-key-here"
+        - name: LANGFUSE_INIT_PROJECT_SECRET_KEY
+          value: "sk-lf-your-secret-key-here"
+        - name: LANGFUSE_INIT_USER_EMAIL
+          value: "admin@uaiso.lan"
+        - name: LANGFUSE_INIT_USER_PASSWORD
+          value: "Admin123!!!"
+        - name: ADMIN_API_KEY
+          value: "sk-admin-your-token-super-duper-safe"
+clickhouse:
+  cluster:
+    resources:
+      requests:
+        cpu: 250m
+        memory: 1Gi
+  keeper:
+    replicas: 1
+    resources:
+      requests:
+        cpu: 50m
+        memory: 128Mi
+s3:
+  allInOne:
+    resources:
+      requests:
+        cpu: 50m
+        memory: 128Mi
