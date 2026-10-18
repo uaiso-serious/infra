@@ -13,7 +13,7 @@ kubectl -n gitlab apply -f base/pgsql18.yaml
 kubectl -n gitlab apply -f base/valkey.yaml
 kubectl -n gitlab apply -f base/silo.yaml
 kubectl -n gitlab apply -f base/claudete_cm.yaml
-kubectl -n gitlab rollout status statefulset/silo
+kubectl -n gitlab rollout status statefulset/silo --timeout=0
 kubectl -n gitlab exec pod/silo-0 -- bash -c 'mc alias set local http://localhost:9000 "${MINIO_ROOT_USER}" "${MINIO_ROOT_PASSWORD}"'
 kubectl -n gitlab exec pod/silo-0 -- mc mb local/gitlab-artifacts-storage
 kubectl -n gitlab exec pod/silo-0 -- mc mb local/gitlab-lfs-storage
@@ -22,14 +22,14 @@ kubectl -n gitlab exec pod/silo-0 -- mc mb local/gitlab-backup-storage
 kubectl -n gitlab exec pod/silo-0 -- mc mb local/gitlab-tmp-storage
 kubectl -n gitlab exec pod/silo-0 -- mc mb local/gitlab-uploads-storage
 kubectl -n gitlab exec pod/silo-0 -- mc mb local/gitlab-registry-storage
-kubectl -n gitlab rollout status deployment/valkey
-kubectl -n gitlab rollout status statefulset/postgres
+kubectl -n gitlab rollout status deployment/valkey --timeout=0
+kubectl -n gitlab rollout status statefulset/postgres --timeout=0
 helm upgrade --install gitlab gitlab/gitlab \
   -n gitlab --create-namespace \
   --values values.yaml \
   --version 10.4.2
-kubectl -n gitlab rollout status deployment/gitlab-toolbox
-kubectl -n gitlab rollout status deployment/gitlab-webservice-default
+kubectl -n gitlab rollout status deployment/gitlab-toolbox --timeout=0
+kubectl -n gitlab rollout status deployment/gitlab-webservice-default --timeout=0
 TOKEN_ROOT=$(kubectl -n gitlab exec $(kubectl -n gitlab get pod -l app=toolbox -o jsonpath='{.items[0].metadata.name}') -- \
 gitlab-rails runner '
   user = User.find_by_username("root")
@@ -68,7 +68,7 @@ kubectl -n gitlab \
 until kubectl -n gitlab get pod glab-runner &> /dev/null; do
   sleep 1
 done
-kubectl -n gitlab wait --for=condition=Ready pod/glab-runner --timeout=120s
+kubectl -n gitlab wait --for=condition=Ready pod/glab-runner --timeout=600s
 
 kubectl -n gitlab cp glab/install.sh glab-runner:/tmp
 kubectl -n gitlab cp glab/claudete-ci.yaml glab-runner:/tmp
