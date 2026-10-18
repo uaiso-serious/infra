@@ -5,17 +5,6 @@ run_claudete_job:
     - if: $CI_PIPELINE_SOURCE == "trigger"
   script:
     - apk add --no-cache jq
-    - echo -------
-    - echo $KUBE_CONFIG
-    - echo -------
-    - cat $KUBE_CONFIG
-    - echo -------
-    - echo $TRIGGER_PAYLOAD
-    - echo -------
-    - cat $TRIGGER_PAYLOAD
-    - echo -------
-    - cat $TRIGGER_PAYLOAD | jq
-    - echo -------
     - |
       BOT_ID=2
       EVENT_TYPE=$(jq -r '.event_type' "${TRIGGER_PAYLOAD}")

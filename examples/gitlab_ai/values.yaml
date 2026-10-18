@@ -4,7 +4,7 @@ global:
   edition: ce
   hosts:
     domain: uaiso.lan
-    externalIp: 192.168.13.6
+    externalIp: 127.0.0.1
     https: false
   initialRootPassword:
     secret: gitlab-initial-root-passwd

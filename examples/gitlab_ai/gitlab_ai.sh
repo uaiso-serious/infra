@@ -1,4 +1,6 @@
 #!/bin/bash
+SCRIPT_DIR="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
+cd "${SCRIPT_DIR}" || exit
 helm repo add gitlab https://charts.gitlab.io/
 helm repo update
 kubectl create ns gitlab
