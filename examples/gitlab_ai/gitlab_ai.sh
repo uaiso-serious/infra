@@ -1,4 +1,6 @@
 #!/bin/bash
+helm repo add gitlab https://charts.gitlab.io/
+helm repo update
 kubectl create ns gitlab
 kubectl -n gitlab create secret generic postgresql --from-literal=password=mysecurepassword
 kubectl -n gitlab create secret generic gitlab-object-storage --from-file=connection=tmp/silo-config.yaml
