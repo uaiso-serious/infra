@@ -7,8 +7,8 @@ This document describes a simple example of integrating Claude code with Gitlab.
 Hardware/network/so requirements
 
 - Minimum 16GB RAM
-- Minimum 4 CPU cores
-- Minimum 30GB disk (ubuntu + k3s + container images)
+- Minimum 8 CPU cores
+- Minimum 60GB disk (ubuntu + k3s + container images)
 - Internet access to download container images and LLM model
 - Ubuntu 24.04 LTS
 

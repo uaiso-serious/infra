@@ -11,6 +11,7 @@ spec:
       containers:
         - name: claudete
           image: registry.gitlab.com/nilzao/claudete:latest
+          imagePullPolicy: IfNotPresent
           args:
             - "siga o fluxo da tarefa"
           env:
