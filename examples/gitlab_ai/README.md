@@ -2,6 +2,7 @@
 ```bash
 git clone https://github.com/uaiso-serious/infra.git
 ./infra/_setup/k3s/k3s.sh
+./infra/_setup/helm.sh
 ./infra/examples/gitlab_ai/gitlab_ai.sh
 ```
 
