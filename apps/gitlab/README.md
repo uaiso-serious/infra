@@ -32,6 +32,8 @@ kubectl -n gitlab apply -f base/valkey.yaml
 run helm chart
 
 ```bash
+helm repo add gitlab https://charts.gitlab.io/
+helm repo update
 helm upgrade --install gitlab gitlab/gitlab \
   -n gitlab --create-namespace \
   --values values.yaml \
