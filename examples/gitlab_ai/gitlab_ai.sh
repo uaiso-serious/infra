@@ -3,6 +3,7 @@ SCRIPT_DIR="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
 cd "${SCRIPT_DIR}" || exit
 helm repo add gitlab https://charts.gitlab.io/
 helm repo update
+kubectl apply -f base/squid.yaml
 kubectl create ns gitlab
 kubectl -n gitlab create secret generic postgresql --from-literal=password=mysecurepassword
 kubectl -n gitlab create secret generic gitlab-object-storage --from-file=connection=tmp/silo-config.yaml
@@ -68,7 +69,7 @@ kubectl -n gitlab \
 until kubectl -n gitlab get pod glab-runner &> /dev/null; do
   sleep 1
 done
-kubectl -n gitlab wait --for=condition=Ready pod/glab-runner --timeout=600s
+kubectl -n gitlab wait --for=condition=Ready pod/glab-runner --timeout=0
 
 kubectl -n gitlab cp glab/install.sh glab-runner:/tmp
 kubectl -n gitlab cp glab/claudete-ci.yaml glab-runner:/tmp

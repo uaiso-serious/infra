@@ -1,0 +1,71 @@
+apiVersion: v1
+kind: Namespace
+metadata:
+  name: squid
+---
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: squid-ws-conf
+  namespace: squid
+data:
+  ws.conf: |
+    acl CONNECT method CONNECT
+    acl upgrade_websocket req_header Upgrade -i websocket
+    http_access allow CONNECT upgrade_websocket
+    http_access allow upgrade_websocket
+    http_upgrade_request_protocols WebSocket allow all
+    on_unsupported_protocol tunnel all
+    acl SSL_ports port 80
+---
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: squid
+  namespace: squid
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: squid
+  template:
+    metadata:
+      labels:
+        app: squid
+    spec:
+      containers:
+        - name: squid
+          image: ubuntu/squid:6.6-24.04_edge
+          env:
+            - name: TZ
+              value: UTC
+          ports:
+            - containerPort: 3128
+              protocol: TCP
+          volumeMounts:
+            - name: ws-conf
+              mountPath: /etc/squid/conf.d/ws.conf
+              subPath: ws.conf
+          readinessProbe:
+            tcpSocket:
+              port: 3128
+            initialDelaySeconds: 5
+            periodSeconds: 10
+      volumes:
+        - name: ws-conf
+          configMap:
+            name: squid-ws-conf
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: squid-service
+  namespace: squid
+spec:
+  selector:
+    app: squid
+  ports:
+    - port: 3128
+      targetPort: 3128
+      protocol: TCP
+  type: LoadBalancer
