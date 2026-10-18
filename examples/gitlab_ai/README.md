@@ -1,6 +1,6 @@
 # Gitlab with Ai agent
 
-This document describes a simple example of integrating Claude code with Gitlab.
+This document describes a simple example of integrating Claude code with Gitlab and LLM telemetry with Langfuse.
 
 ## Requirements
 
@@ -23,6 +23,7 @@ git clone https://github.com/uaiso-serious/infra.git
 ./infra/_setup/k3s/k3s.sh
 ./infra/_setup/helm.sh
 ./infra/examples/gitlab_ai/gitlab_ai.sh
+./infra/examples/gitlab_ai/langfuse/langfuse.sh
 ```
 
 Create free ollama account, generate API key
@@ -50,3 +51,10 @@ Description:
 ```
 crie um arquivo hello.txt contendo a palavra paranguaricutirimirruaro, faça commit, push, e abra merge request 
 ```
+
+Open [http://langfuse.uaiso.lan](http://langfuse.uaiso.lan)
+
+- email: admin@uaiso.lan
+- passwd: Admin123!!!
+
+Navigate do demo project, LLM telemetry should be there.
