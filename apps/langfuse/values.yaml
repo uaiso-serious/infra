@@ -1,0 +1,9 @@
+langfuse:
+  ingress:
+    enabled: true
+    className: traefik
+    hosts:
+      - host: "langfuse.uaiso.lan"
+        paths:
+          - path: /
+            pathType: ImplementationSpecific
